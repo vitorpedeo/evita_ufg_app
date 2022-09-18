@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+
+import 'package:evita_ufg_app/routes/pages.dart';
+import 'package:evita_ufg_app/routes/routes.dart';
 
 class EvitaUFGApp extends StatelessWidget {
   const EvitaUFGApp({super.key});
@@ -11,7 +14,8 @@ class EvitaUFGApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Container(),
+      initialRoute: Routes.login,
+      getPages: Pages.pages,
     );
   }
 }
