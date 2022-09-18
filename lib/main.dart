@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
+import 'package:evita_ufg_app/core/theme/custom.dart';
 import 'package:evita_ufg_app/routes/pages.dart';
 import 'package:evita_ufg_app/routes/routes.dart';
 
@@ -12,7 +13,11 @@ class EvitaUFGApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Evita UFG',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: CustomTheme.fontFamily,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: CustomTheme.primaryColor,
+          secondary: CustomTheme.accentColor,
+        ),
       ),
       initialRoute: Routes.login,
       getPages: Pages.pages,

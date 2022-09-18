@@ -22,11 +22,17 @@ class LoginPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Obx(
-                () => Text(
-                  _controller.title.value,
+              ElevatedButton(
+                onPressed: () {},
+                child: Obx(
+                  () => Text(
+                    _controller.title.value,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
