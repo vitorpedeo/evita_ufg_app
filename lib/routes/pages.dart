@@ -1,3 +1,5 @@
+import 'package:evita_ufg_app/app/modules/create_account/binding.dart';
+import 'package:evita_ufg_app/app/modules/create_account/page.dart';
 import 'package:get/get.dart';
 
 import 'package:evita_ufg_app/app/modules/login/binding.dart';
@@ -10,6 +12,11 @@ class Pages {
       name: Routes.login,
       binding: LoginBinding(),
       page: () => LoginPage(),
+    ),
+    GetPage(
+      name: Routes.createAccount,
+      binding: CreateAccountBinding(),
+      page: () => CreateAccountPage(),
     ),
   ];
 }

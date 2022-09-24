@@ -1,4 +1,4 @@
-import 'package:evita_ufg_app/app/modules/login/widgets/google_login_button.dart';
+import 'package:evita_ufg_app/app/modules/create_account/controller.dart';
 import 'package:evita_ufg_app/app/widgets/app_button.dart';
 import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
@@ -8,12 +8,11 @@ import 'package:flutter/material.dart';
 
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
-import 'package:evita_ufg_app/app/modules/login/controller.dart';
 
-class LoginPage extends StatelessWidget {
-  final _controller = Get.find<LoginController>();
+class CreateAccountPage extends StatelessWidget {
+  final _controller = Get.find<CreateAccountController>();
 
-  LoginPage({super.key});
+  CreateAccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,15 +54,22 @@ class LoginPage extends StatelessWidget {
                           bottom: 10,
                         ),
                         child: const HeadingText(
-                          'Login',
+                          'Criar conta',
                         ),
                       ),
                       const BodyText(
-                        'Fuja dos professores ruins nesse semestre',
+                        'Descubra qual professor deve ser evitado',
                         textAlign: TextAlign.center,
                       ),
                     ],
                   ),
+                ),
+                const TextInput(
+                  label: 'Nome',
+                  hintText: 'Digite seu nome',
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 const TextInput(
                   label: 'Email',
@@ -81,45 +87,22 @@ class LoginPage extends StatelessWidget {
                   height: 32,
                 ),
                 AppButton(
-                  'Entrar',
+                  'Criar conta',
                   onPressed: () {},
                 ),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 16,
-                  ),
-                  child: Row(
-                    children: const [
-                      Expanded(
-                        child: Divider(),
-                      ),
-                      SizedBox(
-                        width: 14,
-                      ),
-                      BodyText('ou'),
-                      SizedBox(
-                        width: 14,
-                      ),
-                      Expanded(
-                        child: Divider(),
-                      ),
-                    ],
-                  ),
-                ),
-                const GoogleLoginButton(),
                 const SizedBox(
                   height: 24,
                 ),
                 const BodyText(
-                  'Não tem uma conta?',
+                  'Já tem uma conta?',
                   color: CustomTheme.tertiaryTextColor,
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.toNamed('/create-account');
+                    Get.toNamed('/login');
                   },
                   child: const BodyText(
-                    'Crie agora',
+                    'Entre agora',
                     color: CustomTheme.primaryColor,
                     fontWeight: FontWeight.w700,
                   ),
