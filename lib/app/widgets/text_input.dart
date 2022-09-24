@@ -140,7 +140,7 @@ class TextInput extends StatelessWidget {
                 InputDecoration(
                   hintText: hintText,
                   isDense: true,
-                  contentPadding: EdgeInsets.fromLTRB(10, 15, 10, 15),
+                  contentPadding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                   filled: true,
                   fillColor: const Color.fromRGBO(237, 242, 247, 1),
                   border: const OutlineInputBorder(

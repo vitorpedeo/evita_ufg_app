@@ -13,12 +13,12 @@ class Pages {
     GetPage(
       name: Routes.login,
       binding: LoginBinding(),
-      page: () => LoginPage(),
+      page: () => const LoginPage(),
     ),
     GetPage(
       name: Routes.createAccount,
       binding: CreateAccountBinding(),
-      page: () => CreateAccountPage(),
+      page: () => const CreateAccountPage(),
     ),
   ];
 }

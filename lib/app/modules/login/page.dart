@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 // Project imports:
-import 'package:evita_ufg_app/app/modules/login/controller.dart';
 import 'package:evita_ufg_app/app/modules/login/widgets/google_login_button.dart';
 import 'package:evita_ufg_app/app/widgets/app_button.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
@@ -15,9 +14,7 @@ import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class LoginPage extends StatelessWidget {
-  final _controller = Get.find<LoginController>();
-
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
