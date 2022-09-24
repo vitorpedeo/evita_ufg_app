@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.evita_ufg_app">
    <application
-        android:label="evita_ufg_app"
+        android:label="Evita UFG"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
