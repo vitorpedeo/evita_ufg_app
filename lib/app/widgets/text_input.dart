@@ -8,6 +8,7 @@ class TextInput extends StatelessWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final InputDecoration? decoration;
+  final String? hintText;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final TextCapitalization? textCapitalization;
@@ -18,6 +19,7 @@ class TextInput extends StatelessWidget {
   final bool? autofocus;
   final int? maxLines;
   final int? minLines;
+  final bool? obscureText;
   final bool? expands;
   final bool? readOnly;
   final bool? showCursor;
@@ -37,6 +39,7 @@ class TextInput extends StatelessWidget {
       this.controller,
       this.focusNode,
       this.decoration,
+      this.hintText,
       this.keyboardType,
       this.textInputAction,
       this.textCapitalization,
@@ -47,6 +50,7 @@ class TextInput extends StatelessWidget {
       this.autofocus,
       this.maxLines,
       this.minLines,
+      this.obscureText,
       this.expands,
       this.readOnly,
       this.showCursor,
@@ -77,18 +81,19 @@ class TextInput extends StatelessWidget {
                 controller: controller,
                 focusNode: focusNode,
                 decoration: decoration ??
-                    const InputDecoration(
+                    InputDecoration(
+                      hintText: hintText,
                       isDense: true,
-                      contentPadding: EdgeInsets.fromLTRB(10, 16, 10, 15),
+                      contentPadding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                       filled: true,
-                      fillColor: Color.fromRGBO(237, 242, 247, 1),
-                      border: OutlineInputBorder(
+                      fillColor: const Color.fromRGBO(237, 242, 247, 1),
+                      border: const OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.all(
                           Radius.circular(6),
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(
                           color: CustomTheme.primaryColor,
                         ),
@@ -101,13 +106,15 @@ class TextInput extends StatelessWidget {
                 style: style ??
                     const TextStyle(
                       color: CustomTheme.primaryTextColor,
+                      fontSize: 14,
                     ),
                 textAlign: textAlign ?? TextAlign.start,
                 textAlignVertical: textAlignVertical,
                 textDirection: textDirection,
                 autofocus: autofocus ?? false,
-                maxLines: maxLines,
+                maxLines: maxLines ?? 1,
                 minLines: minLines,
+                obscureText: obscureText ?? false,
                 expands: expands ?? false,
                 readOnly: readOnly ?? false,
                 showCursor: showCursor,
@@ -127,16 +134,19 @@ class TextInput extends StatelessWidget {
             controller: controller,
             focusNode: focusNode,
             decoration: decoration ??
-                const InputDecoration(
+                InputDecoration(
+                  hintText: hintText,
+                  isDense: true,
+                  contentPadding: EdgeInsets.fromLTRB(10, 15, 10, 15),
                   filled: true,
-                  fillColor: Color.fromRGBO(237, 242, 247, 1),
-                  border: OutlineInputBorder(
+                  fillColor: const Color.fromRGBO(237, 242, 247, 1),
+                  border: const OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.all(
                       Radius.circular(6),
                     ),
                   ),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: CustomTheme.primaryColor,
                     ),
@@ -148,6 +158,7 @@ class TextInput extends StatelessWidget {
             style: style ??
                 const TextStyle(
                   color: CustomTheme.primaryTextColor,
+                  fontSize: 14,
                 ),
             textAlign: textAlign ?? TextAlign.start,
             textAlignVertical: textAlignVertical,
@@ -155,6 +166,7 @@ class TextInput extends StatelessWidget {
             autofocus: autofocus ?? false,
             maxLines: maxLines,
             minLines: minLines,
+            obscureText: obscureText ?? false,
             expands: expands ?? false,
             readOnly: readOnly ?? false,
             showCursor: showCursor,

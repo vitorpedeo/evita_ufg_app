@@ -11,7 +11,7 @@ class GoogleLoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       minWidth: Get.width,
-      height: 50,
+      height: 40,
       color: const Color.fromRGBO(66, 133, 244, 1),
       highlightColor: CustomTheme.accentColor,
       onPressed: () {},
@@ -32,7 +32,7 @@ class GoogleLoginButton extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: 12,
+            width: 8,
           ),
           const BodyText(
             'Entrar com o Google',

@@ -34,8 +34,8 @@ class LoginPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 88,
-                  height: 88,
+                  width: 80,
+                  height: 80,
                   child: FittedBox(
                     child: SvgPicture.asset(
                       'assets/images/evita_logo.svg',
@@ -67,12 +67,15 @@ class LoginPage extends StatelessWidget {
                 ),
                 const TextInput(
                   label: 'Email',
+                  hintText: 'Digite seu email',
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 const TextInput(
                   label: 'Senha',
+                  obscureText: true,
+                  hintText: 'Digite sua senha',
                 ),
                 const SizedBox(
                   height: 32,

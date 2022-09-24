@@ -75,7 +75,7 @@ class BodyText extends StatelessWidget {
       text,
       style: GoogleFonts.inter(
         color: color ?? CustomTheme.secondaryTextColor,
-        fontSize: fontSize ?? 16,
+        fontSize: fontSize ?? 14,
         fontWeight: fontWeight ?? FontWeight.w400,
         backgroundColor: backgroundColor,
         fontStyle: fontStyle,
