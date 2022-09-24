@@ -1,8 +1,13 @@
+// Dart imports:
 import 'dart:ui';
 
-import 'package:google_fonts/google_fonts.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:google_fonts/google_fonts.dart';
+
+// Project imports:
 import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class HeadingText extends StatelessWidget {

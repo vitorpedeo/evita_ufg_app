@@ -1,6 +1,10 @@
-import 'package:get/get.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:get/get.dart';
+
+// Project imports:
 import 'package:evita_ufg_app/core/theme/custom.dart';
 import 'package:evita_ufg_app/routes/pages.dart';
 import 'package:evita_ufg_app/routes/routes.dart';

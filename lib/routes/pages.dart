@@ -1,7 +1,9 @@
-import 'package:evita_ufg_app/app/modules/create_account/binding.dart';
-import 'package:evita_ufg_app/app/modules/create_account/page.dart';
+// Package imports:
 import 'package:get/get.dart';
 
+// Project imports:
+import 'package:evita_ufg_app/app/modules/create_account/binding.dart';
+import 'package:evita_ufg_app/app/modules/create_account/page.dart';
 import 'package:evita_ufg_app/app/modules/login/binding.dart';
 import 'package:evita_ufg_app/app/modules/login/page.dart';
 import 'package:evita_ufg_app/routes/routes.dart';

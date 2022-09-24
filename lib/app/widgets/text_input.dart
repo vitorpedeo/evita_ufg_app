@@ -1,7 +1,10 @@
-import 'package:evita_ufg_app/app/widgets/body_text.dart';
-import 'package:evita_ufg_app/core/theme/custom.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+// Project imports:
+import 'package:evita_ufg_app/app/widgets/body_text.dart';
+import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class TextInput extends StatelessWidget {
   final String? label;

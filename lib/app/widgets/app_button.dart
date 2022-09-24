@@ -1,7 +1,12 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:get/get.dart';
+
+// Project imports:
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AppButton extends StatelessWidget {
   final String? label;
