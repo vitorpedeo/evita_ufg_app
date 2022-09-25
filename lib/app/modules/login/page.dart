@@ -83,7 +83,9 @@ class LoginPage extends StatelessWidget {
                 ),
                 AppButton(
                   'Entrar',
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.offAllNamed('/home');
+                  },
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(

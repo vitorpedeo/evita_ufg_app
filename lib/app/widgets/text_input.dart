@@ -12,6 +12,8 @@ class TextInput extends StatelessWidget {
   final FocusNode? focusNode;
   final InputDecoration? decoration;
   final String? hintText;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final TextCapitalization? textCapitalization;
@@ -43,6 +45,8 @@ class TextInput extends StatelessWidget {
       this.focusNode,
       this.decoration,
       this.hintText,
+      this.prefixIcon,
+      this.suffixIcon,
       this.keyboardType,
       this.textInputAction,
       this.textCapitalization,
@@ -86,6 +90,10 @@ class TextInput extends StatelessWidget {
                 decoration: decoration ??
                     InputDecoration(
                       hintText: hintText,
+                      prefixIcon: prefixIcon,
+                      prefixIconColor: const Color.fromRGBO(113, 128, 150, 0.5),
+                      suffixIcon: suffixIcon,
+                      suffixIconColor: const Color.fromRGBO(113, 128, 150, 0.5),
                       isDense: true,
                       contentPadding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                       filled: true,
@@ -139,6 +147,10 @@ class TextInput extends StatelessWidget {
             decoration: decoration ??
                 InputDecoration(
                   hintText: hintText,
+                  prefixIcon: prefixIcon,
+                  prefixIconColor: const Color.fromRGBO(113, 128, 150, 0.5),
+                  suffixIcon: suffixIcon,
+                  suffixIconColor: const Color.fromRGBO(113, 128, 150, 0.5),
                   isDense: true,
                   contentPadding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                   filled: true,
