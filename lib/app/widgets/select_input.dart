@@ -52,7 +52,7 @@ class SelectInput<T> extends StatelessWidget {
           ),
           icon: const Icon(
             Icons.keyboard_arrow_down_outlined,
-            color: Color.fromRGBO(113, 128, 150, 1),
+            color: CustomTheme.secondaryTextColor,
           ),
         ),
       ),

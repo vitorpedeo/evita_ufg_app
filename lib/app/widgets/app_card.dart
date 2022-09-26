@@ -5,12 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // Project imports:
-import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class AppCard extends StatelessWidget {
-  const AppCard({super.key});
+  final Widget icon;
+  final String title;
+  final Widget subtitle;
+  final void Function() onTap;
+
+  const AppCard(
+      {super.key,
+      required this.icon,
+      required this.title,
+      required this.subtitle,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +27,7 @@ class AppCard extends StatelessWidget {
       type: MaterialType.transparency,
       child: InkWell(
         splashColor: CustomTheme.accentColor,
-        onTap: () {},
+        onTap: onTap,
         child: Ink(
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
@@ -40,12 +49,8 @@ class AppCard extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: CustomTheme.accentColor,
                 ),
-                child: const Center(
-                  child: Icon(
-                    Icons.menu_book,
-                    size: 24,
-                    color: CustomTheme.primaryColor,
-                  ),
+                child: Center(
+                  child: icon,
                 ),
               ),
               const SizedBox(
@@ -55,18 +60,15 @@ class AppCard extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     HeadingText(
-                      'CENTRO DE ENSINO E PESQUISA APLICADA A EDUCACAO',
+                      title,
                       fontSize: 12,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 4,
                     ),
-                    BodyText(
-                      'Goiânia',
-                      fontSize: 10,
-                    ),
+                    subtitle,
                   ],
                 ),
               ),

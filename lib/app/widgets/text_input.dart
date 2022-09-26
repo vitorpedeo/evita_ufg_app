@@ -91,9 +91,9 @@ class TextInput extends StatelessWidget {
                     InputDecoration(
                       hintText: hintText,
                       prefixIcon: prefixIcon,
-                      prefixIconColor: const Color.fromRGBO(113, 128, 150, 0.5),
+                      prefixIconColor: CustomTheme.secondaryTextColor,
                       suffixIcon: suffixIcon,
-                      suffixIconColor: const Color.fromRGBO(113, 128, 150, 0.5),
+                      suffixIconColor: CustomTheme.secondaryTextColor,
                       isDense: true,
                       contentPadding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                       filled: true,
@@ -148,9 +148,9 @@ class TextInput extends StatelessWidget {
                 InputDecoration(
                   hintText: hintText,
                   prefixIcon: prefixIcon,
-                  prefixIconColor: const Color.fromRGBO(113, 128, 150, 0.5),
+                  prefixIconColor: CustomTheme.secondaryTextColor,
                   suffixIcon: suffixIcon,
-                  suffixIconColor: const Color.fromRGBO(113, 128, 150, 0.5),
+                  suffixIconColor: CustomTheme.secondaryTextColor,
                   isDense: true,
                   contentPadding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                   filled: true,

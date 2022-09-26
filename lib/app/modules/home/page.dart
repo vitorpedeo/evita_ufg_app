@@ -121,7 +121,21 @@ class HomePage extends StatelessWidget {
                   child: ListView.separated(
                     itemCount: 20,
                     itemBuilder: (context, index) {
-                      return const AppCard();
+                      return AppCard(
+                        icon: const Icon(
+                          Icons.menu_book,
+                          size: 24,
+                          color: CustomTheme.primaryColor,
+                        ),
+                        title: 'CENTRO INTEGRADO DE APRENDIZAGEM EM REDE',
+                        subtitle: const BodyText(
+                          'Goiânia',
+                          fontSize: 10,
+                        ),
+                        onTap: () {
+                          Get.toNamed('/teachers');
+                        },
+                      );
                     },
                     separatorBuilder: (context, index) {
                       return const SizedBox(
