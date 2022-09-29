@@ -45,7 +45,7 @@ class TeachersPage extends StatelessWidget {
                       color: CustomTheme.primaryColor,
                       fontWeight: FontWeight.w700,
                     ),
-                  )
+                  ),
                 ],
               ),
               Container(
@@ -150,7 +150,9 @@ class TeachersPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed('/teacher');
+                        },
                       );
                     },
                     separatorBuilder: (context, index) {
