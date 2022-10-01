@@ -113,18 +113,20 @@ class CommentCard extends StatelessWidget {
             ),
           ],
         ),
-        endActionPane: const ActionPane(
-          motion: ScrollMotion(),
+        endActionPane: ActionPane(
+          motion: const ScrollMotion(),
           children: [
             SlidableAction(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(6),
                 bottomRight: Radius.circular(6),
               ),
               backgroundColor: CustomTheme.primaryColor,
               foregroundColor: Colors.white,
               icon: Icons.edit,
-              onPressed: null,
+              onPressed: (context) {
+                Get.toNamed('/edit-evaluation');
+              },
             ),
           ],
         ),

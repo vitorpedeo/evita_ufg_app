@@ -12,8 +12,8 @@ import 'package:evita_ufg_app/app/widgets/star_input.dart';
 import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 
-class CreateEvaluationPage extends StatelessWidget {
-  const CreateEvaluationPage({super.key});
+class EditEvaluationPage extends StatelessWidget {
+  const EditEvaluationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +121,7 @@ class CreateEvaluationPage extends StatelessWidget {
                   child: Column(
                     children: [
                       StarInput(
-                        initialValue: 0,
+                        initialValue: 3.5,
                         onChanged: (rating) {},
                       ),
                       const SizedBox(
@@ -129,13 +129,14 @@ class CreateEvaluationPage extends StatelessWidget {
                       ),
                       const TextInput(
                         label: 'Comentário',
+                        hintText: 'Professor muito infeliz!',
                         maxLines: 5,
                       ),
                       const SizedBox(
                         height: 16,
                       ),
                       AppButton(
-                        'Confirmar',
+                        'Editar',
                         onPressed: () {
                           Get.back();
                         },
