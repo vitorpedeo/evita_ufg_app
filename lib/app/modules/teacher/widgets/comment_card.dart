@@ -6,7 +6,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
 // Project imports:
+import 'package:evita_ufg_app/app/widgets/app_button.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
+import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class CommentCard extends StatelessWidget {
@@ -98,18 +100,56 @@ class CommentCard extends StatelessWidget {
     if (isFromLoggedUser) {
       return Slidable(
         key: ValueKey(id),
-        startActionPane: const ActionPane(
-          motion: ScrollMotion(),
+        startActionPane: ActionPane(
+          motion: const ScrollMotion(),
           children: [
             SlidableAction(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(6),
                 bottomLeft: Radius.circular(6),
               ),
               backgroundColor: CustomTheme.redColor,
               foregroundColor: Colors.white,
               icon: Icons.delete,
-              onPressed: null,
+              onPressed: (context) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const HeadingText(
+                        'Confirmar exclusão',
+                        fontSize: 16,
+                      ),
+                      content: const BodyText(
+                          'Tem certeza que deseja excluir sua avaliação?',
+                          fontSize: 14),
+                      actions: [
+                        AppButton(
+                          'Não',
+                          minWidth: 100,
+                          color: CustomTheme.redColor,
+                          onPressed: () {
+                            Get.back();
+                          },
+                        ),
+                        AppButton(
+                          'Sim',
+                          minWidth: 100,
+                          onPressed: () {
+                            Get.back();
+                          },
+                        ),
+                      ],
+                      actionsAlignment: MainAxisAlignment.spaceBetween,
+                      actionsPadding: const EdgeInsets.only(
+                        left: 24,
+                        bottom: 24,
+                        right: 24,
+                      ),
+                    );
+                  },
+                );
+              },
             ),
           ],
         ),
