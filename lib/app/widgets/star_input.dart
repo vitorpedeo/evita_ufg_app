@@ -9,9 +9,11 @@ import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class StarInput extends StatelessWidget {
+  final double initialValue;
   final void Function(double) onChanged;
 
-  const StarInput({super.key, required this.onChanged});
+  const StarInput(
+      {super.key, required this.initialValue, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class StarInput extends StatelessWidget {
               height: 8,
             ),
             RatingBar(
-              initialRating: 0,
+              initialRating: initialValue,
               direction: Axis.horizontal,
               allowHalfRating: true,
               itemCount: 5,
