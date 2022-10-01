@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 // Project imports:
 import 'package:evita_ufg_app/app/modules/create_account/binding.dart';
 import 'package:evita_ufg_app/app/modules/create_account/page.dart';
+import 'package:evita_ufg_app/app/modules/create_evaluation/binding.dart';
+import 'package:evita_ufg_app/app/modules/create_evaluation/page.dart';
 import 'package:evita_ufg_app/app/modules/home/binding.dart';
 import 'package:evita_ufg_app/app/modules/home/page.dart';
 import 'package:evita_ufg_app/app/modules/login/binding.dart';
@@ -40,6 +42,11 @@ class Pages {
       name: Routes.teacher,
       binding: TeacherBinding(),
       page: () => const TeacherPage(),
+    ),
+    GetPage(
+      name: Routes.createEvaluation,
+      binding: CreateEvaluationBinding(),
+      page: () => const CreateEvaluationPage(),
     ),
   ];
 }
