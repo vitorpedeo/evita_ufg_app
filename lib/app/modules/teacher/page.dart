@@ -176,7 +176,9 @@ class TeacherPage extends StatelessWidget {
               ),
               AppButton(
                 'Avaliar',
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed('/create-evaluation');
+                },
               ),
             ],
           ),
