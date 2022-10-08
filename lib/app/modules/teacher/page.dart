@@ -19,8 +19,8 @@ class TeacherPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          width: Get.width,
-          height: Get.height,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.symmetric(
             horizontal: 24,
             vertical: 32,
@@ -52,7 +52,7 @@ class TeacherPage extends StatelessWidget {
                 margin: const EdgeInsets.only(
                   top: 32,
                 ),
-                width: Get.width,
+                width: MediaQuery.of(context).size.width,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

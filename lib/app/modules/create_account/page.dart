@@ -20,8 +20,8 @@ class CreateAccountPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          width: Get.width,
-          height: Get.height,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.symmetric(
             horizontal: 24,
             vertical: 32,

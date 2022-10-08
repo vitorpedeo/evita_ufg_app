@@ -19,10 +19,10 @@ class CommentCard extends StatelessWidget {
   const CommentCard(
       {super.key, required this.id, required this.isFromLoggedUser});
 
-  Widget _buildCard() {
+  Widget _buildCard(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
-      width: Get.width,
+      width: MediaQuery.of(context).size.width,
       decoration: const BoxDecoration(
         color: Color.fromRGBO(237, 242, 247, 1),
         borderRadius: BorderRadius.all(
@@ -170,10 +170,10 @@ class CommentCard extends StatelessWidget {
             ),
           ],
         ),
-        child: _buildCard(),
+        child: _buildCard(context),
       );
     }
 
-    return _buildCard();
+    return _buildCard(context);
   }
 }
