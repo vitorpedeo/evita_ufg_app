@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
@@ -15,7 +14,7 @@ class GoogleLoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      minWidth: Get.width,
+      minWidth: MediaQuery.of(context).size.width,
       height: 40,
       color: const Color.fromRGBO(66, 133, 244, 1),
       highlightColor: CustomTheme.accentColor,

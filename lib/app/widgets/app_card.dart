@@ -1,9 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
-import 'package:get/get.dart';
-
 // Project imports:
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
@@ -32,7 +29,7 @@ class AppCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
           ),
-          width: Get.width,
+          width: MediaQuery.of(context).size.width,
           height: 80,
           decoration: const BoxDecoration(
             color: Color.fromRGBO(236, 242, 247, 1),

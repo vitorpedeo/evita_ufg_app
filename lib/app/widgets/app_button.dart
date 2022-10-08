@@ -1,9 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
-import 'package:get/get.dart';
-
 // Project imports:
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
@@ -77,7 +74,7 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      minWidth: minWidth ?? Get.width,
+      minWidth: minWidth ?? MediaQuery.of(context).size.width,
       height: height ?? 40,
       color: color ?? CustomTheme.primaryColor,
       highlightColor: highlightColor ?? CustomTheme.accentColor,
