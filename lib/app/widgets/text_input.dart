@@ -14,6 +14,7 @@ class TextInput extends StatelessWidget {
   final String? hintText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final String? errorText;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final TextCapitalization? textCapitalization;
@@ -47,6 +48,7 @@ class TextInput extends StatelessWidget {
       this.hintText,
       this.prefixIcon,
       this.suffixIcon,
+      this.errorText,
       this.keyboardType,
       this.textInputAction,
       this.textCapitalization,
@@ -94,6 +96,20 @@ class TextInput extends StatelessWidget {
                       prefixIconColor: CustomTheme.secondaryTextColor,
                       suffixIcon: suffixIcon,
                       suffixIconColor: CustomTheme.secondaryTextColor,
+                      errorText: errorText,
+                      errorStyle: const TextStyle(
+                        color: CustomTheme.redColor,
+                      ),
+                      errorBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: CustomTheme.redColor,
+                        ),
+                      ),
+                      focusedErrorBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: CustomTheme.redColor,
+                        ),
+                      ),
                       isDense: true,
                       contentPadding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                       filled: true,
@@ -151,6 +167,20 @@ class TextInput extends StatelessWidget {
                   prefixIconColor: CustomTheme.secondaryTextColor,
                   suffixIcon: suffixIcon,
                   suffixIconColor: CustomTheme.secondaryTextColor,
+                  errorText: errorText,
+                  errorStyle: const TextStyle(
+                    color: CustomTheme.redColor,
+                  ),
+                  errorBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: CustomTheme.redColor,
+                    ),
+                  ),
+                  focusedErrorBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: CustomTheme.redColor,
+                    ),
+                  ),
                   isDense: true,
                   contentPadding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                   filled: true,

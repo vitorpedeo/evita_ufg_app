@@ -2,10 +2,12 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 // Project imports:
+import 'package:evita_ufg_app/app/modules/create_account/controller.dart';
 import 'package:evita_ufg_app/app/widgets/app_button.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
@@ -13,7 +15,24 @@ import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class CreateAccountPage extends StatelessWidget {
-  const CreateAccountPage({super.key});
+  final _formKey = GlobalKey<FormBuilderState>();
+  final _controller = Get.find<CreateAccountController>();
+
+  CreateAccountPage({super.key});
+
+  Future<void> _handleFormSubmit() async {
+    _formKey.currentState!.save();
+
+    FocusManager.instance.primaryFocus?.unfocus();
+
+    if (_formKey.currentState!.validate()) {
+      Map<String, dynamic> formData = _formKey.currentState!.value;
+
+      await _controller.handleNewAccount(formData);
+
+      Get.offAllNamed('/login');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,31 +84,87 @@ class CreateAccountPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const TextInput(
-                  label: 'Nome',
-                  hintText: 'Digite seu nome',
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const TextInput(
-                  label: 'Email',
-                  hintText: 'Digite seu email',
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const TextInput(
-                  label: 'Senha',
-                  obscureText: true,
-                  hintText: 'Digite sua senha',
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                AppButton(
-                  'Criar conta',
-                  onPressed: () {},
+                FormBuilder(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      FormBuilderField<String>(
+                        name: 'name',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Campo obrigatório';
+                          }
+
+                          return null;
+                        },
+                        builder: (field) {
+                          return TextInput(
+                            label: 'Nome',
+                            hintText: 'Digite seu nome',
+                            errorText: field.errorText,
+                            onChanged: (value) => field.didChange(value),
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FormBuilderField<String>(
+                        name: 'email',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Campo obrigatório';
+                          }
+
+                          if (!GetUtils.isEmail(value)) {
+                            return 'E-mail inválido';
+                          }
+
+                          return null;
+                        },
+                        builder: (field) {
+                          return TextInput(
+                            label: 'Email',
+                            hintText: 'Digite seu email',
+                            errorText: field.errorText,
+                            onChanged: (value) => field.didChange(value),
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FormBuilderField<String>(
+                        name: 'password',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Campo obrigatório';
+                          }
+
+                          return null;
+                        },
+                        builder: (field) {
+                          return TextInput(
+                            label: 'Senha',
+                            obscureText: true,
+                            hintText: 'Digite sua senha',
+                            errorText: field.errorText,
+                            onChanged: (value) => field.didChange(value),
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      Obx(
+                        () => AppButton(
+                          'Criar conta',
+                          onPressed: _handleFormSubmit,
+                          isLoading: _controller.isLoading.value,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 24,

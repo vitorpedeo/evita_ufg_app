@@ -10,6 +10,7 @@ class AppButton extends StatelessWidget {
   final void Function() onPressed;
   final void Function()? onLongPress;
   final void Function(bool)? onHighlightChanged;
+  final bool isLoading;
   final MouseCursor? mouseCursor;
   final ButtonTextTheme? textTheme;
   final Color? textColor;
@@ -43,6 +44,7 @@ class AppButton extends StatelessWidget {
     required this.onPressed,
     this.onLongPress,
     this.onHighlightChanged,
+    this.isLoading = false,
     this.mouseCursor,
     this.textTheme,
     this.textColor,
@@ -78,13 +80,13 @@ class AppButton extends StatelessWidget {
       height: height ?? 40,
       color: color ?? CustomTheme.primaryColor,
       highlightColor: highlightColor ?? CustomTheme.accentColor,
-      onPressed: onPressed,
-      onLongPress: onLongPress,
+      onPressed: isLoading ? null : onPressed,
+      onLongPress: isLoading ? null : onLongPress,
       onHighlightChanged: onHighlightChanged,
       mouseCursor: mouseCursor,
       textTheme: textTheme,
       disabledTextColor: disabledTextColor,
-      disabledColor: disabledColor,
+      disabledColor: disabledColor ?? CustomTheme.primaryColor,
       focusColor: focusColor,
       hoverColor: hoverColor,
       splashColor: splashColor,
@@ -105,11 +107,21 @@ class AppButton extends StatelessWidget {
       autofocus: autofocus ?? false,
       animationDuration: animationDuration,
       enableFeedback: enableFeedback ?? true,
-      child: BodyText(
-        label ?? '',
-        color: Colors.white,
-        fontWeight: FontWeight.w700,
-      ),
+      child: isLoading
+          ? const SizedBox(
+              width: 18,
+              height: 18,
+              child: FittedBox(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                ),
+              ),
+            )
+          : BodyText(
+              label ?? '',
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+            ),
     );
   }
 }
