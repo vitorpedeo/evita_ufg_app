@@ -28,7 +28,7 @@ class Pages {
     GetPage(
       name: Routes.createAccount,
       binding: CreateAccountBinding(),
-      page: () => const CreateAccountPage(),
+      page: () => CreateAccountPage(),
     ),
     GetPage(
       name: Routes.home,

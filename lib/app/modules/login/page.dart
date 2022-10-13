@@ -18,6 +18,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isKeyboardOpen = Get.mediaQuery.viewInsets.bottom > 0;
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -34,38 +36,44 @@ class LoginPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: FittedBox(
-                    child: SvgPicture.asset(
-                      'assets/images/evita_logo.svg',
-                      semanticsLabel: 'Logo do Evita UFG',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 24,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(
-                          bottom: 10,
-                        ),
-                        child: const HeadingText(
-                          'Login',
-                        ),
-                      ),
-                      const BodyText(
-                        'Fuja dos professores ruins nesse semestre',
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
+                !isKeyboardOpen
+                    ? Column(
+                        children: [
+                          SizedBox(
+                            width: 80,
+                            height: 80,
+                            child: FittedBox(
+                              child: SvgPicture.asset(
+                                'assets/images/evita_logo.svg',
+                                semanticsLabel: 'Logo do Evita UFG',
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                              vertical: 24,
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(
+                                    bottom: 10,
+                                  ),
+                                  child: const HeadingText(
+                                    'Login',
+                                  ),
+                                ),
+                                const BodyText(
+                                  'Fuja dos professores ruins nesse semestre',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
                 const TextInput(
                   label: 'Email',
                   hintText: 'Digite seu email',
