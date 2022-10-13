@@ -25,6 +25,7 @@ class CustomSnack {
       padding: const EdgeInsets.all(
         12,
       ),
+      borderRadius: 4,
       backgroundColor: isSuccess ? Colors.green.shade400 : CustomTheme.redColor,
       colorText: Colors.white,
       snackPosition: SnackPosition.TOP,

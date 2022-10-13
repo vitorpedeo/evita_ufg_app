@@ -34,6 +34,8 @@ class CreateAccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isKeyboardOpen = Get.mediaQuery.viewInsets.bottom > 0;
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -44,41 +46,50 @@ class CreateAccountPage extends StatelessWidget {
             vertical: 32,
           ),
           child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(
+              parent: NeverScrollableScrollPhysics(),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: FittedBox(
-                    child: SvgPicture.asset(
-                      'assets/images/evita_logo.svg',
-                      semanticsLabel: 'Logo do Evita UFG',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 24,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(
-                          bottom: 10,
-                        ),
-                        child: const HeadingText(
-                          'Criar conta',
-                        ),
-                      ),
-                      const BodyText(
-                        'Descubra qual professor deve ser evitado',
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
+                !isKeyboardOpen
+                    ? Column(
+                        children: [
+                          SizedBox(
+                            width: 80,
+                            height: 80,
+                            child: FittedBox(
+                              child: SvgPicture.asset(
+                                'assets/images/evita_logo.svg',
+                                semanticsLabel: 'Logo do Evita UFG',
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                              vertical: 24,
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(
+                                    bottom: 10,
+                                  ),
+                                  child: const HeadingText(
+                                    'Criar conta',
+                                  ),
+                                ),
+                                const BodyText(
+                                  'Descubra qual professor deve ser evitado',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
                 FormBuilder(
                   key: _formKey,
                   initialValue: const {
@@ -170,20 +181,26 @@ class CreateAccountPage extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                const BodyText(
-                  'Já tem uma conta?',
-                  color: CustomTheme.tertiaryTextColor,
-                ),
-                TextButton(
-                  onPressed: () {
-                    Get.toNamed('/login');
-                  },
-                  child: const BodyText(
-                    'Entre agora',
-                    color: CustomTheme.primaryColor,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
+                !isKeyboardOpen
+                    ? Column(
+                        children: [
+                          const BodyText(
+                            'Já tem uma conta?',
+                            color: CustomTheme.tertiaryTextColor,
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Get.toNamed('/login');
+                            },
+                            child: const BodyText(
+                              'Entre agora',
+                              color: CustomTheme.primaryColor,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
               ],
             ),
           ),
