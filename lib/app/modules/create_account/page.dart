@@ -29,8 +29,6 @@ class CreateAccountPage extends StatelessWidget {
       Map<String, dynamic> formData = _formKey.currentState!.value;
 
       await _controller.handleNewAccount(formData);
-
-      Get.offAllNamed('/login');
     }
   }
 
@@ -46,9 +44,6 @@ class CreateAccountPage extends StatelessWidget {
             vertical: 32,
           ),
           child: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(
-              parent: NeverScrollableScrollPhysics(),
-            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -86,6 +81,11 @@ class CreateAccountPage extends StatelessWidget {
                 ),
                 FormBuilder(
                   key: _formKey,
+                  initialValue: const {
+                    'name': '',
+                    'email': '',
+                    'password': '',
+                  },
                   child: Column(
                     children: [
                       FormBuilderField<String>(
@@ -101,6 +101,7 @@ class CreateAccountPage extends StatelessWidget {
                           return TextInput(
                             label: 'Nome',
                             hintText: 'Digite seu nome',
+                            textCapitalization: TextCapitalization.words,
                             errorText: field.errorText,
                             onChanged: (value) => field.didChange(value),
                           );
