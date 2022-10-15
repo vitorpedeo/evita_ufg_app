@@ -14,7 +14,9 @@ import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final _controller = Get.find<HomeController>();
+
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,25 +36,29 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    children: const [
-                      CircleAvatar(
-                        backgroundImage:
-                            NetworkImage('https://github.com/vitorpedeo.png'),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      BodyText(
-                        'Olá,',
-                        color: CustomTheme.primaryTextColor,
-                      ),
-                      BodyText(
-                        'Vitor',
-                        color: CustomTheme.primaryTextColor,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ],
+                  Obx(
+                    () => !_controller.isLoadingUser.value
+                        ? Row(
+                            children: [
+                              const CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    'https://github.com/vitorpedeo.png'),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              const BodyText(
+                                'Olá,',
+                                color: CustomTheme.primaryTextColor,
+                              ),
+                              BodyText(
+                                _controller.user.value?.name ?? '',
+                                color: CustomTheme.primaryTextColor,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ],
+                          )
+                        : Container(),
                   ),
                   IconButton(
                     onPressed: () {
