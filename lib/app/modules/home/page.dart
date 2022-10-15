@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // Project imports:
+import 'package:evita_ufg_app/app/data/services/storage.dart';
 import 'package:evita_ufg_app/app/modules/home/controller.dart';
 import 'package:evita_ufg_app/app/widgets/app_card.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
@@ -12,9 +13,11 @@ import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/app/widgets/select_input.dart';
 import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
+import 'package:evita_ufg_app/core/utils/string_utils.dart';
 
 class HomePage extends StatelessWidget {
   final _controller = Get.find<HomeController>();
+  final _storageService = Get.find<StorageService>();
 
   HomePage({super.key});
 
@@ -37,32 +40,40 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Obx(
-                    () => !_controller.isLoadingUser.value
-                        ? Row(
-                            children: [
-                              const CircleAvatar(
+                    () => Row(
+                      children: [
+                        _storageService.user.value?.avatarUrl != null
+                            ? CircleAvatar(
                                 backgroundImage: NetworkImage(
-                                    'https://github.com/vitorpedeo.png'),
+                                  _storageService.user.value!.avatarUrl!,
+                                ),
+                              )
+                            : const CircleAvatar(
+                                backgroundColor: CustomTheme.accentColor,
+                                child: Icon(
+                                  Icons.person,
+                                  color: CustomTheme.primaryColor,
+                                ),
                               ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              const BodyText(
-                                'Olá,',
-                                color: CustomTheme.primaryTextColor,
-                              ),
-                              BodyText(
-                                _controller.user.value?.name ?? '',
-                                color: CustomTheme.primaryTextColor,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ],
-                          )
-                        : Container(),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        const BodyText(
+                          'Olá,',
+                          color: CustomTheme.primaryTextColor,
+                        ),
+                        BodyText(
+                          StringUtils.getFirstName(
+                              _storageService.user.value?.name),
+                          color: CustomTheme.primaryTextColor,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ],
+                    ),
                   ),
                   IconButton(
                     onPressed: () {
-                      Get.offAllNamed('/login');
+                      _controller.logout();
                     },
                     icon: const Icon(
                       Icons.logout,

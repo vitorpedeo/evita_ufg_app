@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:evita_ufg_app/app/data/models/auth.dart';
 import 'package:evita_ufg_app/app/data/services/storage.dart';
 import 'package:evita_ufg_app/app/modules/login/repository.dart';
-import 'package:evita_ufg_app/core/utils/custom_snack.dart';
+import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 
 class LoginController extends GetxController {
-  final StorageService _storageService = StorageService();
+  final StorageService _storageService = Get.find<StorageService>();
   final LoginRepository _repository = LoginRepository();
 
   RxBool isLoading = false.obs;
@@ -18,9 +18,9 @@ class LoginController extends GetxController {
       isLoading(true);
 
       AuthModel auth = await _repository.postLogin(data);
-      await _storageService.saveUser(auth.user);
-      await _storageService.saveToken(auth.token);
-      await _storageService.saveAuthenticated(true);
+      await _storageService.setUser(auth.user);
+      await _storageService.setToken(auth.token);
+      await _storageService.setAuthenticated(true);
 
       CustomSnack.show(
         message: 'Bem vindo!',

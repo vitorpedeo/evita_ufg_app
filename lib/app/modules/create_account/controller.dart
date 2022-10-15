@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/modules/create_account/repository.dart';
-import 'package:evita_ufg_app/core/utils/custom_snack.dart';
+import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 
 class CreateAccountController extends GetxController {
   final CreateAccountRepository _repository = CreateAccountRepository();
