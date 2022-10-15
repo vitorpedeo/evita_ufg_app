@@ -1,11 +1,11 @@
-class User {
+class UserModel {
   int? id;
   String? name;
   String? avatarUrl;
   String? email;
   String? password;
 
-  User({
+  UserModel({
     this.id,
     this.name,
     this.avatarUrl,
@@ -13,7 +13,7 @@ class User {
     this.password,
   });
 
-  User.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     avatarUrl = json['avatar_url'];

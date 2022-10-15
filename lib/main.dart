@@ -5,9 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // Project imports:
+import 'package:evita_ufg_app/app/data/services/storage.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 import 'package:evita_ufg_app/routes/pages.dart';
 import 'package:evita_ufg_app/routes/routes.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initServices();
+
+  runApp(const EvitaUFGApp());
+}
+
+Future<void> initServices() async {
+  await Get.putAsync(
+    () => StorageService().init(),
+  );
+}
 
 class EvitaUFGApp extends StatelessWidget {
   const EvitaUFGApp({super.key});
@@ -23,12 +37,10 @@ class EvitaUFGApp extends StatelessWidget {
           secondary: CustomTheme.accentColor,
         ),
       ),
-      initialRoute: Routes.login,
+      initialRoute: Get.find<StorageService>().authenticated.value
+          ? Routes.home
+          : Routes.login,
       getPages: Pages.pages,
     );
   }
-}
-
-void main() {
-  runApp(const EvitaUFGApp());
 }

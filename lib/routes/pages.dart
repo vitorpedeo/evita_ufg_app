@@ -23,7 +23,7 @@ class Pages {
     GetPage(
       name: Routes.login,
       binding: LoginBinding(),
-      page: () => const LoginPage(),
+      page: () => LoginPage(),
     ),
     GetPage(
       name: Routes.createAccount,
@@ -33,7 +33,7 @@ class Pages {
     GetPage(
       name: Routes.home,
       binding: HomeBinding(),
-      page: () => const HomePage(),
+      page: () => HomePage(),
     ),
     GetPage(
       name: Routes.teachers,
