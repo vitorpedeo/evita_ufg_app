@@ -23,6 +23,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isKeyboardOpen = Get.mediaQuery.viewInsets.bottom > 0;
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -35,56 +37,58 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Obx(
-                    () => Row(
+              !isKeyboardOpen
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        _storageService.user.value?.avatarUrl != null
-                            ? CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                  _storageService.user.value!.avatarUrl!,
-                                ),
-                              )
-                            : const CircleAvatar(
-                                backgroundColor: CustomTheme.accentColor,
-                                child: Icon(
-                                  Icons.person,
-                                  color: CustomTheme.primaryColor,
-                                ),
+                        Obx(
+                          () => Row(
+                            children: [
+                              _storageService.user.value?.avatarUrl != null
+                                  ? CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                        _storageService.user.value!.avatarUrl!,
+                                      ),
+                                    )
+                                  : const CircleAvatar(
+                                      backgroundColor: CustomTheme.accentColor,
+                                      child: Icon(
+                                        Icons.person,
+                                        color: CustomTheme.primaryColor,
+                                      ),
+                                    ),
+                              const SizedBox(
+                                width: 8,
                               ),
-                        const SizedBox(
-                          width: 8,
+                              const BodyText(
+                                'Olá, ',
+                                color: CustomTheme.primaryTextColor,
+                              ),
+                              BodyText(
+                                StringUtils.getFirstName(
+                                    _storageService.user.value?.name),
+                                color: CustomTheme.primaryTextColor,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ],
+                          ),
                         ),
-                        const BodyText(
-                          'Olá,',
-                          color: CustomTheme.primaryTextColor,
-                        ),
-                        BodyText(
-                          StringUtils.getFirstName(
-                              _storageService.user.value?.name),
-                          color: CustomTheme.primaryTextColor,
-                          fontWeight: FontWeight.w700,
+                        IconButton(
+                          onPressed: () {
+                            _controller.logout();
+                          },
+                          icon: const Icon(
+                            Icons.logout,
+                            color: CustomTheme.primaryColor,
+                          ),
                         ),
                       ],
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      _controller.logout();
-                    },
-                    icon: const Icon(
-                      Icons.logout,
-                      color: CustomTheme.primaryColor,
-                    ),
-                  ),
-                ],
-              ),
+                    )
+                  : Container(),
               Container(
-                margin: const EdgeInsets.only(
-                  top: 32,
+                margin: EdgeInsets.only(
+                  top: !isKeyboardOpen ? 32 : 0,
                 ),
                 child: const HeadingText(
                   'Departamentos',
@@ -101,31 +105,38 @@ class HomePage extends StatelessWidget {
               ),
               Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: TextInput(
                       hintText: 'Nome',
-                      prefixIcon: Icon(
+                      prefixIcon: const Icon(
                         Icons.search,
                         size: 20,
                       ),
+                      onChanged: (value) {
+                        _controller.departmentName.value = value;
+
+                        _controller.handleFilter();
+                      },
                     ),
                   ),
                   const SizedBox(
                     width: 8,
                   ),
                   Expanded(
-                    child: GetBuilder<HomeController>(
-                      builder: (_) {
-                        return SelectInput<String>(
-                          selectedItem: _.selectedValue,
-                          items: _.selectValues,
-                          onChanged: (item) {
-                            _.updateSelectedValue(item);
-                          },
-                          label: (item) => item,
-                          hint: 'Região',
-                        );
-                      },
+                    child: Obx(
+                      () => !_controller.isLoadingDepartments.value
+                          ? SelectInput<String>(
+                              selectedItem: _controller.selectedRegional.value,
+                              items: _controller.regionalValues,
+                              onChanged: (item) {
+                                _controller.selectedRegional.value = item!;
+
+                                _controller.handleFilter();
+                              },
+                              label: (item) => item,
+                              hint: 'Região',
+                            )
+                          : Container(),
                     ),
                   ),
                 ],
@@ -135,30 +146,42 @@ class HomePage extends StatelessWidget {
                   margin: const EdgeInsets.only(
                     top: 24,
                   ),
-                  child: ListView.separated(
-                    itemCount: 20,
-                    itemBuilder: (context, index) {
-                      return AppCard(
-                        icon: const Icon(
-                          Icons.menu_book,
-                          size: 24,
-                          color: CustomTheme.primaryColor,
-                        ),
-                        title: 'CENTRO INTEGRADO DE APRENDIZAGEM EM REDE',
-                        subtitle: const BodyText(
-                          'Goiânia',
-                          fontSize: 10,
-                        ),
-                        onTap: () {
-                          Get.toNamed('/teachers');
-                        },
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(
-                        height: 12,
-                      );
-                    },
+                  child: Obx(
+                    () => !_controller.isLoadingDepartments.value
+                        ? ListView.separated(
+                            itemCount: _controller.filteredDepartments.length,
+                            itemBuilder: (context, index) {
+                              return AppCard(
+                                icon: const Icon(
+                                  Icons.menu_book,
+                                  size: 24,
+                                  color: CustomTheme.primaryColor,
+                                ),
+                                title: _controller
+                                        .filteredDepartments[index].name ??
+                                    '---',
+                                subtitle: BodyText(
+                                  _controller.filteredDepartments[index]
+                                          .regional ??
+                                      '---',
+                                  fontSize: 10,
+                                ),
+                                onTap: () {
+                                  Get.toNamed('/teachers');
+                                },
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const SizedBox(
+                                height: 12,
+                              );
+                            },
+                          )
+                        : const Center(
+                            child: CircularProgressIndicator(
+                              color: CustomTheme.primaryColor,
+                            ),
+                          ),
                   ),
                 ),
               ),
