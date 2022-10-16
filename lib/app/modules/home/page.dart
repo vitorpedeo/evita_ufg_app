@@ -167,7 +167,13 @@ class HomePage extends StatelessWidget {
                                   fontSize: 10,
                                 ),
                                 onTap: () {
-                                  Get.toNamed('/teachers');
+                                  Get.toNamed('/teachers', arguments: {
+                                    'departmentName': _controller
+                                        .filteredDepartments[index].name,
+                                    'departmentId': _controller
+                                        .filteredDepartments[index].id
+                                        .toString(),
+                                  });
                                 },
                               );
                             },
