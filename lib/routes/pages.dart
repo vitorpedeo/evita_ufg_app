@@ -38,7 +38,7 @@ class Pages {
     GetPage(
       name: Routes.teachers,
       binding: TeachersBinding(),
-      page: () => const TeachersPage(),
+      page: () => TeachersPage(),
     ),
     GetPage(
       name: Routes.teacher,
