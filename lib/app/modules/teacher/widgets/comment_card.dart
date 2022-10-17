@@ -4,20 +4,26 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 // Project imports:
+import 'package:evita_ufg_app/app/data/models/comment.dart';
 import 'package:evita_ufg_app/app/widgets/app_button.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class CommentCard extends StatelessWidget {
-  final int id;
-
+  final CommentModel? comment;
   final bool isFromLoggedUser;
+  final Future<void> Function() onDelete;
 
-  const CommentCard(
-      {super.key, required this.id, required this.isFromLoggedUser});
+  const CommentCard({
+    super.key,
+    required this.comment,
+    required this.isFromLoggedUser,
+    required this.onDelete,
+  });
 
   Widget _buildCard(BuildContext context) {
     return Container(
@@ -33,11 +39,19 @@ class CommentCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const CircleAvatar(
-                backgroundImage:
-                    NetworkImage('https://github.com/vitorpedeo.png'),
-                minRadius: 16,
-              ),
+              comment?.user?.avatarUrl != null
+                  ? CircleAvatar(
+                      backgroundImage: NetworkImage(comment!.user!.avatarUrl!),
+                      minRadius: 16,
+                    )
+                  : const CircleAvatar(
+                      backgroundColor: CustomTheme.accentColor,
+                      minRadius: 16,
+                      child: Icon(
+                        Icons.person,
+                        color: CustomTheme.primaryColor,
+                      ),
+                    ),
               const SizedBox(
                 width: 10,
               ),
@@ -45,26 +59,26 @@ class CommentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    children: const [
+                    children: [
                       BodyText(
-                        'Lima Mei',
+                        comment?.user?.name ?? '---',
                         color: CustomTheme.primaryTextColor,
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.star,
                         size: 18,
                         color: CustomTheme.yellowColor,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 4,
                       ),
                       BodyText(
-                        '4,5',
+                        comment?.rating.toString() ?? '---',
                         color: CustomTheme.primaryTextColor,
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
@@ -74,8 +88,12 @@ class CommentCard extends StatelessWidget {
                   const SizedBox(
                     height: 4,
                   ),
-                  const BodyText(
-                    '29 de março de 2022, às 13:45',
+                  BodyText(
+                    comment?.updatedAt != null
+                        ? DateFormat(
+                                "dd 'de' MMMM 'de' yyyy, 'às' HH:mm", 'pt_BR')
+                            .format(comment!.updatedAt!)
+                        : '---',
                     fontSize: 10,
                   ),
                 ],
@@ -85,10 +103,17 @@ class CommentCard extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          const BodyText(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tempor mauris enim, vitae porttitor nulla tempus nec. Lorem ipsum dolor sit amet.',
-            fontSize: 12,
-            height: 1.5,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: BodyText(
+                  comment?.content ?? '---',
+                  fontSize: 12,
+                  height: 1.5,
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -99,7 +124,7 @@ class CommentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isFromLoggedUser) {
       return Slidable(
-        key: ValueKey(id),
+        key: ValueKey(comment?.id),
         startActionPane: ActionPane(
           motion: const ScrollMotion(),
           children: [
@@ -137,6 +162,8 @@ class CommentCard extends StatelessWidget {
                           minWidth: 100,
                           onPressed: () {
                             Get.back();
+
+                            onDelete();
                           },
                         ),
                       ],
