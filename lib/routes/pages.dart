@@ -53,7 +53,7 @@ class Pages {
     GetPage(
       name: Routes.editEvaluation,
       binding: EditEvaluationBinding(),
-      page: () => const EditEvaluationPage(),
+      page: () => EditEvaluationPage(),
     ),
   ];
 }

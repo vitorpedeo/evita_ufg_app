@@ -30,6 +30,7 @@ class TextInput extends StatelessWidget {
   final bool? readOnly;
   final bool? showCursor;
   final int? maxLength;
+  final String? initialValue;
   final ValueChanged<String>? onChanged;
   final VoidCallback? onEditingComplete;
   final ValueChanged<String>? onSubmitted;
@@ -64,6 +65,7 @@ class TextInput extends StatelessWidget {
       this.readOnly,
       this.showCursor,
       this.maxLength,
+      this.initialValue,
       this.onChanged,
       this.onEditingComplete,
       this.onSubmitted,
@@ -86,7 +88,7 @@ class TextInput extends StatelessWidget {
               const SizedBox(
                 height: 8,
               ),
-              TextField(
+              TextFormField(
                 controller: controller,
                 focusNode: focusNode,
                 decoration: decoration ??
@@ -146,10 +148,9 @@ class TextInput extends StatelessWidget {
                 readOnly: readOnly ?? false,
                 showCursor: showCursor,
                 maxLength: maxLength,
+                initialValue: initialValue,
                 onChanged: onChanged,
                 onEditingComplete: onEditingComplete,
-                onSubmitted: onSubmitted,
-                onAppPrivateCommand: onAppPrivateCommand,
                 inputFormatters: inputFormatters,
                 enabled: enabled,
                 keyboardAppearance: keyboardAppearance,
@@ -157,7 +158,7 @@ class TextInput extends StatelessWidget {
               ),
             ],
           )
-        : TextField(
+        : TextFormField(
             controller: controller,
             focusNode: focusNode,
             decoration: decoration ??
@@ -216,10 +217,9 @@ class TextInput extends StatelessWidget {
             readOnly: readOnly ?? false,
             showCursor: showCursor,
             maxLength: maxLength,
+            initialValue: initialValue,
             onChanged: onChanged,
             onEditingComplete: onEditingComplete,
-            onSubmitted: onSubmitted,
-            onAppPrivateCommand: onAppPrivateCommand,
             inputFormatters: inputFormatters,
             enabled: enabled,
             keyboardAppearance: keyboardAppearance,

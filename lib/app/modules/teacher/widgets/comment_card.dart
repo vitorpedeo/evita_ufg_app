@@ -16,6 +16,7 @@ import 'package:evita_ufg_app/core/theme/custom.dart';
 class CommentCard extends StatelessWidget {
   final CommentModel? comment;
   final bool isFromLoggedUser;
+  final void Function() onEdit;
   final Future<void> Function() onDelete;
 
   const CommentCard({
@@ -23,6 +24,7 @@ class CommentCard extends StatelessWidget {
     required this.comment,
     required this.isFromLoggedUser,
     required this.onDelete,
+    required this.onEdit,
   });
 
   Widget _buildCard(BuildContext context) {
@@ -192,7 +194,7 @@ class CommentCard extends StatelessWidget {
               foregroundColor: Colors.white,
               icon: Icons.edit,
               onPressed: (context) {
-                Get.toNamed('/edit-evaluation');
+                onEdit();
               },
             ),
           ],

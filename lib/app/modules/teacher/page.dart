@@ -177,6 +177,16 @@ class TeacherPage extends StatelessWidget {
                                 comment:
                                     _controller.teacher.value?.comments?[index],
                                 isFromLoggedUser: isFromLoggedUser,
+                                onEdit: () {
+                                  Get.toNamed(
+                                    '/edit-evaluation',
+                                    arguments: {
+                                      'teacher': _controller.teacher.value,
+                                      'comment': _controller
+                                          .teacher.value?.comments?[index],
+                                    },
+                                  );
+                                },
                                 onDelete: () async {
                                   await _controller.deleteComment(
                                     _controller
