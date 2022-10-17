@@ -107,6 +107,7 @@ class TeacherPage extends StatelessWidget {
                               _controller.teacher.value?.department?.name ??
                                   '---',
                               fontSize: 12,
+                              textAlign: TextAlign.center,
                             ),
                             const SizedBox(
                               height: 16,
@@ -207,7 +208,12 @@ class TeacherPage extends StatelessWidget {
                         return AppButton(
                           'Avaliar',
                           onPressed: () {
-                            Get.toNamed('/create-evaluation');
+                            Get.toNamed(
+                              '/create-evaluation',
+                              arguments: {
+                                'teacher': _controller.teacher.value,
+                              },
+                            );
                           },
                         );
                       }),

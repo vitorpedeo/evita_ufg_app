@@ -48,7 +48,7 @@ class Pages {
     GetPage(
       name: Routes.createEvaluation,
       binding: CreateEvaluationBinding(),
-      page: () => const CreateEvaluationPage(),
+      page: () => CreateEvaluationPage(),
     ),
     GetPage(
       name: Routes.editEvaluation,
