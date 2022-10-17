@@ -43,7 +43,7 @@ class Pages {
     GetPage(
       name: Routes.teacher,
       binding: TeacherBinding(),
-      page: () => const TeacherPage(),
+      page: () => TeacherPage(),
     ),
     GetPage(
       name: Routes.createEvaluation,

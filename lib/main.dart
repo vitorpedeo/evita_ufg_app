@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/data/services/storage.dart';
@@ -21,6 +22,8 @@ Future<void> initServices() async {
   await Get.putAsync(
     () => StorageService().init(),
   );
+
+  await initializeDateFormatting('pt_BR', null);
 }
 
 class EvitaUFGApp extends StatelessWidget {
