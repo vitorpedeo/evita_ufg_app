@@ -107,6 +107,7 @@ class TeacherPage extends StatelessWidget {
                               _controller.teacher.value?.department?.name ??
                                   '---',
                               fontSize: 12,
+                              textAlign: TextAlign.center,
                             ),
                             const SizedBox(
                               height: 16,
@@ -176,6 +177,16 @@ class TeacherPage extends StatelessWidget {
                                 comment:
                                     _controller.teacher.value?.comments?[index],
                                 isFromLoggedUser: isFromLoggedUser,
+                                onEdit: () {
+                                  Get.toNamed(
+                                    '/edit-evaluation',
+                                    arguments: {
+                                      'teacher': _controller.teacher.value,
+                                      'comment': _controller
+                                          .teacher.value?.comments?[index],
+                                    },
+                                  );
+                                },
                                 onDelete: () async {
                                   await _controller.deleteComment(
                                     _controller
@@ -207,7 +218,12 @@ class TeacherPage extends StatelessWidget {
                         return AppButton(
                           'Avaliar',
                           onPressed: () {
-                            Get.toNamed('/create-evaluation');
+                            Get.toNamed(
+                              '/create-evaluation',
+                              arguments: {
+                                'teacher': _controller.teacher.value,
+                              },
+                            );
                           },
                         );
                       }),
