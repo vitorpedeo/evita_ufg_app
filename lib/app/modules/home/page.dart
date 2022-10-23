@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/data/services/storage.dart';
 import 'package:evita_ufg_app/app/modules/home/controller.dart';
 import 'package:evita_ufg_app/app/widgets/app_card.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
+import 'package:evita_ufg_app/app/widgets/error_feedback.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/app/widgets/select_input.dart';
 import 'package:evita_ufg_app/app/widgets/text_input.dart';
@@ -20,6 +22,160 @@ class HomePage extends StatelessWidget {
   final _storageService = Get.find<StorageService>();
 
   HomePage({super.key});
+
+  Widget _buildFilters() {
+    if (_controller.isLoadingDepartments.value) {
+      return Row(
+        children: [
+          Expanded(
+            child: Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade100,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                ),
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(6),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Expanded(
+            child: Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade100,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                ),
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(6),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
+    if (_controller.isError.value) {
+      return Container();
+    }
+
+    return Row(
+      children: [
+        Expanded(
+          child: TextInput(
+            hintText: 'Nome',
+            prefixIcon: const Icon(
+              Icons.search,
+              size: 20,
+            ),
+            onChanged: (value) {
+              _controller.departmentName.value = value;
+
+              _controller.handleFilter();
+            },
+          ),
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Expanded(
+          child: SelectInput<String>(
+            selectedItem: _controller.selectedRegional.value,
+            items: _controller.regionalValues,
+            onChanged: (item) {
+              _controller.selectedRegional.value = item!;
+
+              _controller.handleFilter();
+            },
+            label: (item) => item,
+            hint: 'Região',
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDepartments() {
+    if (_controller.isLoadingDepartments.value) {
+      return ListView.separated(
+        itemCount: 5,
+        separatorBuilder: (context, index) {
+          return const SizedBox(
+            height: 12,
+          );
+        },
+        itemBuilder: (context, index) {
+          return Shimmer.fromColors(
+            baseColor: Colors.grey.shade300,
+            highlightColor: Colors.grey.shade100,
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              height: 80,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(6),
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    }
+
+    if (_controller.isError.value) {
+      return ErrorFeedback(onRetry: () {
+        _controller.getAllDepartments();
+      });
+    }
+
+    return ListView.separated(
+      itemCount: _controller.filteredDepartments.length,
+      itemBuilder: (context, index) {
+        return AppCard(
+          icon: const Icon(
+            Icons.menu_book,
+            size: 24,
+            color: CustomTheme.primaryColor,
+          ),
+          title: _controller.filteredDepartments[index].name ?? '---',
+          subtitle: BodyText(
+            _controller.filteredDepartments[index].regional ?? '---',
+            fontSize: 10,
+          ),
+          onTap: () {
+            Get.toNamed('/teachers', arguments: {
+              'departmentName': _controller.filteredDepartments[index].name,
+              'departmentId':
+                  _controller.filteredDepartments[index].id.toString(),
+            });
+          },
+        );
+      },
+      separatorBuilder: (context, index) {
+        return const SizedBox(
+          height: 12,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,43 +259,8 @@ class HomePage extends StatelessWidget {
                   'Selecione o departamento o qual o professor pertence.',
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextInput(
-                      hintText: 'Nome',
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        size: 20,
-                      ),
-                      onChanged: (value) {
-                        _controller.departmentName.value = value;
-
-                        _controller.handleFilter();
-                      },
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Expanded(
-                    child: Obx(
-                      () => !_controller.isLoadingDepartments.value
-                          ? SelectInput<String>(
-                              selectedItem: _controller.selectedRegional.value,
-                              items: _controller.regionalValues,
-                              onChanged: (item) {
-                                _controller.selectedRegional.value = item!;
-
-                                _controller.handleFilter();
-                              },
-                              label: (item) => item,
-                              hint: 'Região',
-                            )
-                          : Container(),
-                    ),
-                  ),
-                ],
+              Obx(
+                () => _buildFilters(),
               ),
               Expanded(
                 child: Container(
@@ -147,47 +268,7 @@ class HomePage extends StatelessWidget {
                     top: 24,
                   ),
                   child: Obx(
-                    () => !_controller.isLoadingDepartments.value
-                        ? ListView.separated(
-                            itemCount: _controller.filteredDepartments.length,
-                            itemBuilder: (context, index) {
-                              return AppCard(
-                                icon: const Icon(
-                                  Icons.menu_book,
-                                  size: 24,
-                                  color: CustomTheme.primaryColor,
-                                ),
-                                title: _controller
-                                        .filteredDepartments[index].name ??
-                                    '---',
-                                subtitle: BodyText(
-                                  _controller.filteredDepartments[index]
-                                          .regional ??
-                                      '---',
-                                  fontSize: 10,
-                                ),
-                                onTap: () {
-                                  Get.toNamed('/teachers', arguments: {
-                                    'departmentName': _controller
-                                        .filteredDepartments[index].name,
-                                    'departmentId': _controller
-                                        .filteredDepartments[index].id
-                                        .toString(),
-                                  });
-                                },
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return const SizedBox(
-                                height: 12,
-                              );
-                            },
-                          )
-                        : const Center(
-                            child: CircularProgressIndicator(
-                              color: CustomTheme.primaryColor,
-                            ),
-                          ),
+                    () => _buildDepartments(),
                   ),
                 ),
               ),
