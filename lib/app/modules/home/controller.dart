@@ -11,7 +11,8 @@ class HomeController extends GetxController {
   final StorageService _storageService = Get.find<StorageService>();
   final HomeRepository _homeRepository = HomeRepository();
 
-  RxBool isLoadingDepartments = false.obs;
+  RxBool isLoadingDepartments = true.obs;
+  RxBool isError = false.obs;
   List<DepartmentModel> allDepartments = <DepartmentModel>[];
   RxList<DepartmentModel> filteredDepartments = <DepartmentModel>[].obs;
 
@@ -41,11 +42,15 @@ class HomeController extends GetxController {
           .toSet()
           .toList();
       regionalValues.insert(0, 'Todas');
+
+      isError(false);
     } catch (e) {
       CustomSnack.show(
         message: e.toString(),
         type: CustomSnackType.error,
       );
+
+      isError(true);
     } finally {
       isLoadingDepartments(false);
     }
