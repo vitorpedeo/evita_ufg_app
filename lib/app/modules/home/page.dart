@@ -195,6 +195,7 @@ class HomePage extends StatelessWidget {
               top: 24,
             ),
             child: ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: 6,
               separatorBuilder: (context, index) {
                 return const SizedBox(

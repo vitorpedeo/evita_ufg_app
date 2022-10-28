@@ -31,17 +31,19 @@ class TeachersPage extends StatelessWidget {
             horizontal: 24,
             vertical: 32,
           ),
-          child: Obx(() {
-            if (_controller.isLoadingTeachers.value) {
-              return _buildShimmer(context);
-            }
+          child: Obx(
+            () {
+              if (_controller.isLoadingTeachers.value) {
+                return _buildShimmer(context);
+              }
 
-            if (_controller.isError.value) {
-              return _buildError();
-            }
+              if (_controller.isError.value) {
+                return _buildError();
+              }
 
-            return _buildPage(context);
-          }),
+              return _buildPage(context);
+            },
+          ),
         ),
       ),
     );
@@ -130,6 +132,7 @@ class TeachersPage extends StatelessWidget {
               top: 24,
             ),
             child: ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: 6,
               separatorBuilder: (context, index) {
                 return const SizedBox(
@@ -175,6 +178,9 @@ class TeachersPage extends StatelessWidget {
   }
 
   Widget _buildPage(BuildContext context) {
+    String teachersNumberString =
+        _controller.allTeachers.length == 1 ? 'professor' : 'professores';
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -232,9 +238,8 @@ class TeachersPage extends StatelessWidget {
                         text: ' possui ',
                       ),
                       TextSpan(
-                        text: _controller.allTeachers.length == 1
-                            ? '1 professor.'
-                            : '${_controller.allTeachers.length} professores.',
+                        text:
+                            '${_controller.allTeachers.length} $teachersNumberString.',
                         style: const TextStyle(
                           fontWeight: FontWeight.w700,
                         ),

@@ -11,7 +11,8 @@ class TeacherController extends GetxController {
 
   final teacherId = int.parse(Get.arguments['teacherId']);
 
-  RxBool isLoadingTeacher = false.obs;
+  RxBool isLoadingTeacher = true.obs;
+  RxBool isError = false.obs;
   Rx<TeacherModel?> teacher = Rx<TeacherModel?>(null);
 
   @override
@@ -26,11 +27,15 @@ class TeacherController extends GetxController {
       isLoadingTeacher(true);
 
       teacher.value = await _teacherRepository.getTeacherById(teacherId);
+
+      isError(false);
     } catch (e) {
       CustomSnack.show(
         message: e.toString(),
         type: CustomSnackType.error,
       );
+
+      isError(true);
     } finally {
       isLoadingTeacher(false);
     }
