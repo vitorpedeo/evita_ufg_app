@@ -117,7 +117,7 @@ class HomePage extends StatelessWidget {
             baseColor: Colors.grey.shade300,
             highlightColor: Colors.grey.shade100,
             child: Container(
-              height: 24,
+              height: 32,
               decoration: BoxDecoration(
                 color: Colors.grey.shade300,
                 borderRadius: const BorderRadius.all(
@@ -136,7 +136,7 @@ class HomePage extends StatelessWidget {
             baseColor: Colors.grey.shade300,
             highlightColor: Colors.grey.shade100,
             child: Container(
-              height: 28,
+              height: 40,
               decoration: BoxDecoration(
                 color: Colors.grey.shade300,
                 borderRadius: const BorderRadius.all(

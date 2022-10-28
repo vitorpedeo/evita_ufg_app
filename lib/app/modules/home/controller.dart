@@ -11,7 +11,7 @@ class HomeController extends GetxController {
   final StorageService _storageService = Get.find<StorageService>();
   final HomeRepository _homeRepository = HomeRepository();
 
-  RxBool isLoadingDepartments = false.obs;
+  RxBool isLoadingDepartments = true.obs;
   RxBool isError = false.obs;
   List<DepartmentModel> allDepartments = <DepartmentModel>[];
   RxList<DepartmentModel> filteredDepartments = <DepartmentModel>[].obs;

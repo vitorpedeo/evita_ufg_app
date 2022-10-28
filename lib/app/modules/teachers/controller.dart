@@ -9,7 +9,8 @@ import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 class TeachersController extends GetxController {
   final TeachersRepository _teachersRepository = TeachersRepository();
 
-  RxBool isLoadingTeachers = false.obs;
+  RxBool isLoadingTeachers = true.obs;
+  RxBool isError = false.obs;
   RxList<TeacherModel> allTeachers = <TeacherModel>[].obs;
   RxList<TeacherModel> filteredTeachers = <TeacherModel>[].obs;
 
@@ -36,11 +37,15 @@ class TeachersController extends GetxController {
       allTeachers.value = teachers;
       filteredTeachers.value = teachers;
       departmentName.value = Get.arguments['departmentName'];
+
+      isError(false);
     } catch (e) {
       CustomSnack.show(
         message: e.toString(),
         type: CustomSnackType.error,
       );
+
+      isError(true);
     } finally {
       isLoadingTeachers(false);
     }
