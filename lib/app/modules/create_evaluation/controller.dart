@@ -44,12 +44,10 @@ class CreateEvaluationController extends GetxController {
         type: CustomSnackType.success,
       );
 
-      Get.offAndToNamed('/teacher', arguments: {
-        'teacherId': teacher?.id,
-      });
-
       _teacherController.getTeacher();
       _teachersController.getTeachers();
+
+      Get.until((route) => Get.currentRoute == '/teacher');
     } catch (e) {
       CustomSnack.show(
         message: e.toString(),
