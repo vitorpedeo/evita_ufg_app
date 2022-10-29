@@ -5,10 +5,12 @@ import 'package:get/get.dart';
 import 'package:evita_ufg_app/app/data/models/teacher.dart';
 import 'package:evita_ufg_app/app/modules/create_evaluation/repository.dart';
 import 'package:evita_ufg_app/app/modules/teacher/controller.dart';
+import 'package:evita_ufg_app/app/modules/teachers/controller.dart';
 import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 
 class CreateEvaluationController extends GetxController {
   final TeacherController _teacherController = Get.find<TeacherController>();
+  final TeachersController _teachersController = Get.find<TeachersController>();
   final CreateEvaluationRepository _repository = CreateEvaluationRepository();
 
   RxBool isLoadingEvaluationCreation = false.obs;
@@ -42,11 +44,10 @@ class CreateEvaluationController extends GetxController {
         type: CustomSnackType.success,
       );
 
-      Get.offAndToNamed('/teacher', arguments: {
-        'teacherId': teacher?.id,
-      });
-
       _teacherController.getTeacher();
+      _teachersController.getTeachers();
+
+      Get.until((route) => Get.currentRoute == '/teacher');
     } catch (e) {
       CustomSnack.show(
         message: e.toString(),

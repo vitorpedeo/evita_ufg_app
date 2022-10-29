@@ -368,6 +368,8 @@ class HomePage extends StatelessWidget {
                     fontSize: 10,
                   ),
                   onTap: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
+
                     Get.toNamed('/teachers', arguments: {
                       'departmentName':
                           _controller.filteredDepartments[index].name,
