@@ -9,7 +9,7 @@ import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 class TeacherController extends GetxController {
   final TeacherRepository _teacherRepository = TeacherRepository();
 
-  final teacherId = int.parse(Get.arguments['teacherId']);
+  final int teacherId = int.parse(Get.arguments['teacherId']);
 
   RxBool isLoadingTeacher = true.obs;
   RxBool isError = false.obs;

@@ -14,8 +14,10 @@ class TeachersController extends GetxController {
   RxList<TeacherModel> allTeachers = <TeacherModel>[].obs;
   RxList<TeacherModel> filteredTeachers = <TeacherModel>[].obs;
 
+  final int departmentId = int.parse(Get.arguments['departmentId']);
+  final String departmentName = Get.arguments['departmentName'];
+
   Rx<String?> teacherName = Rx<String?>(null);
-  Rx<String?> departmentName = Rx<String?>(null);
 
   @override
   Future<void> onReady() async {
@@ -28,7 +30,6 @@ class TeachersController extends GetxController {
     try {
       isLoadingTeachers(true);
 
-      int departmentId = int.parse(Get.arguments['departmentId']);
       List<TeacherModel> teachers =
           await _teachersRepository.getTeacherByDepartmentId(
         departmentId,
@@ -36,7 +37,6 @@ class TeachersController extends GetxController {
 
       allTeachers.value = teachers;
       filteredTeachers.value = teachers;
-      departmentName.value = Get.arguments['departmentName'];
 
       isError(false);
     } catch (e) {

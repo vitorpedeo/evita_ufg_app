@@ -229,7 +229,7 @@ class TeachersPage extends StatelessWidget {
                         text: 'O departamento ',
                       ),
                       TextSpan(
-                        text: _controller.departmentName.value,
+                        text: _controller.departmentName,
                         style: const TextStyle(
                           fontWeight: FontWeight.w700,
                         ),
@@ -250,7 +250,7 @@ class TeachersPage extends StatelessWidget {
                         text: 'O departamento ',
                       ),
                       TextSpan(
-                        text: _controller.departmentName.value,
+                        text: _controller.departmentName,
                         style: const TextStyle(
                           fontWeight: FontWeight.w700,
                         ),
