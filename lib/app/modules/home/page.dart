@@ -357,10 +357,20 @@ class HomePage extends StatelessWidget {
               itemCount: _controller.filteredDepartments.length,
               itemBuilder: (context, index) {
                 return AppCard(
-                  icon: const Icon(
-                    Icons.menu_book,
-                    size: 24,
-                    color: CustomTheme.primaryColor,
+                  leading: Container(
+                    width: 48,
+                    height: 48,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: CustomTheme.accentColor,
+                    ),
+                    child: const Center(
+                      child: Icon(
+                        Icons.menu_book,
+                        size: 24,
+                        color: CustomTheme.primaryColor,
+                      ),
+                    ),
                   ),
                   title: _controller.filteredDepartments[index].name ?? '---',
                   subtitle: BodyText(
