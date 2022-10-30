@@ -13,8 +13,8 @@ import 'package:evita_ufg_app/app/widgets/app_button.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/app/widgets/error_feedback.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
+import 'package:evita_ufg_app/app/widgets/teacher_avatar.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
-import 'package:evita_ufg_app/core/utils/string_utils.dart';
 
 class TeacherPage extends StatelessWidget {
   final _controller = Get.find<TeacherController>();
@@ -291,23 +291,9 @@ class TeacherPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                width: 56,
-                height: 56,
-                decoration: const BoxDecoration(
-                  color: CustomTheme.accentColor,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Text(
-                    StringUtils.getFirstLetter(_controller.teacher.value?.name),
-                    style: const TextStyle(
-                      color: CustomTheme.primaryColor,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
+              TeacherAvatar(
+                teacher: _controller.teacher.value,
+                size: TeacherAvatarSize.large,
               ),
               const SizedBox(
                 height: 12,

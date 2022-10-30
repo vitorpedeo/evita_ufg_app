@@ -11,9 +11,9 @@ import 'package:evita_ufg_app/app/widgets/app_card.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/app/widgets/error_feedback.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
+import 'package:evita_ufg_app/app/widgets/teacher_avatar.dart';
 import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
-import 'package:evita_ufg_app/core/utils/string_utils.dart';
 
 class TeachersPage extends StatelessWidget {
   final _controller = Get.find<TeachersController>();
@@ -291,11 +291,8 @@ class TeachersPage extends StatelessWidget {
               itemCount: _controller.filteredTeachers.length,
               itemBuilder: (context, index) {
                 return AppCard(
-                  icon: HeadingText(
-                    StringUtils.getFirstLetter(
-                        _controller.filteredTeachers[index].name),
-                    color: CustomTheme.primaryColor,
-                    fontSize: 20,
+                  leading: TeacherAvatar(
+                    teacher: _controller.filteredTeachers[index],
                   ),
                   title: _controller.filteredTeachers[index].name ?? '---',
                   subtitle: Row(

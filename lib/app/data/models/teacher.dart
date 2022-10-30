@@ -5,6 +5,7 @@ import 'package:evita_ufg_app/app/data/models/department.dart';
 class TeacherModel {
   int? id;
   String? name;
+  String? imageUrl;
   String? email;
   double? rating;
   int? evaluations;
@@ -15,6 +16,7 @@ class TeacherModel {
   TeacherModel({
     this.id,
     this.name,
+    this.imageUrl,
     this.email,
     this.rating,
     this.evaluations,
@@ -26,6 +28,7 @@ class TeacherModel {
   TeacherModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    imageUrl = json['image_url'];
     email = json['email'];
     rating = double.parse(json['rating'].toString());
     evaluations = json['evaluations'];
@@ -47,6 +50,7 @@ class TeacherModel {
 
     data['id'] = id;
     data['name'] = name;
+    data['image_url'] = imageUrl;
     data['email'] = email;
     data['rating'] = rating;
     data['evaluations'] = evaluations;
