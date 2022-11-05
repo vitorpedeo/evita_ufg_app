@@ -15,6 +15,7 @@ import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/app/widgets/select_input.dart';
 import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
+import 'package:evita_ufg_app/core/theme/shimmer_colors.dart';
 import 'package:evita_ufg_app/core/utils/string_utils.dart';
 
 class HomePage extends StatelessWidget {
@@ -26,6 +27,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.backgroundColor,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -63,13 +65,15 @@ class HomePage extends StatelessWidget {
             Row(
               children: [
                 Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
+                  baseColor:
+                      context.theme.extension<ShimmerColors>()!.baseColor!,
+                  highlightColor:
+                      context.theme.extension<ShimmerColors>()!.highlightColor!,
                   child: Container(
                     width: 48,
                     height: 48,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
+                    decoration: const BoxDecoration(
+                      color: Color.fromRGBO(26, 32, 44, 1),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -78,14 +82,16 @@ class HomePage extends StatelessWidget {
                   width: 8,
                 ),
                 Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
+                  baseColor:
+                      context.theme.extension<ShimmerColors>()!.baseColor!,
+                  highlightColor:
+                      context.theme.extension<ShimmerColors>()!.highlightColor!,
                   child: Container(
                     width: 64,
                     height: 16,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: const BorderRadius.all(
+                    decoration: const BoxDecoration(
+                      color: Color.fromRGBO(26, 32, 44, 1),
+                      borderRadius: BorderRadius.all(
                         Radius.circular(6),
                       ),
                     ),
@@ -94,14 +100,15 @@ class HomePage extends StatelessWidget {
               ],
             ),
             Shimmer.fromColors(
-              baseColor: Colors.grey.shade300,
-              highlightColor: Colors.grey.shade100,
+              baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+              highlightColor:
+                  context.theme.extension<ShimmerColors>()!.highlightColor!,
               child: Container(
                 width: 48,
                 height: 48,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: const BorderRadius.all(
+                decoration: const BoxDecoration(
+                  color: Color.fromRGBO(26, 32, 44, 1),
+                  borderRadius: BorderRadius.all(
                     Radius.circular(6),
                   ),
                 ),
@@ -114,13 +121,14 @@ class HomePage extends StatelessWidget {
             top: 32,
           ),
           child: Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
+            baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+            highlightColor:
+                context.theme.extension<ShimmerColors>()!.highlightColor!,
             child: Container(
               height: 32,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: const BorderRadius.all(
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(26, 32, 44, 1),
+                borderRadius: BorderRadius.all(
                   Radius.circular(6),
                 ),
               ),
@@ -133,13 +141,14 @@ class HomePage extends StatelessWidget {
             bottom: 24,
           ),
           child: Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
+            baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+            highlightColor:
+                context.theme.extension<ShimmerColors>()!.highlightColor!,
             child: Container(
               height: 40,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: const BorderRadius.all(
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(26, 32, 44, 1),
+                borderRadius: BorderRadius.all(
                   Radius.circular(6),
                 ),
               ),
@@ -150,16 +159,17 @@ class HomePage extends StatelessWidget {
           children: [
             Expanded(
               child: Shimmer.fromColors(
-                baseColor: Colors.grey.shade300,
-                highlightColor: Colors.grey.shade100,
+                baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+                highlightColor:
+                    context.theme.extension<ShimmerColors>()!.highlightColor!,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                   ),
                   height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: const BorderRadius.all(
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(26, 32, 44, 1),
+                    borderRadius: BorderRadius.all(
                       Radius.circular(6),
                     ),
                   ),
@@ -171,15 +181,16 @@ class HomePage extends StatelessWidget {
             ),
             Expanded(
               child: Shimmer.fromColors(
-                baseColor: Colors.grey.shade300,
-                highlightColor: Colors.grey.shade100,
+                baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+                highlightColor:
+                    context.theme.extension<ShimmerColors>()!.highlightColor!,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                   ),
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: context.theme.extension<ShimmerColors>()!.baseColor!,
                     borderRadius: const BorderRadius.all(
                       Radius.circular(6),
                     ),
@@ -204,16 +215,18 @@ class HomePage extends StatelessWidget {
               },
               itemBuilder: (context, index) {
                 return Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
+                  baseColor:
+                      context.theme.extension<ShimmerColors>()!.baseColor!,
+                  highlightColor:
+                      context.theme.extension<ShimmerColors>()!.highlightColor!,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
                     ),
                     height: 80,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: const BorderRadius.all(
+                    decoration: const BoxDecoration(
+                      color: Color.fromRGBO(26, 32, 44, 1),
+                      borderRadius: BorderRadius.all(
                         Radius.circular(6),
                       ),
                     ),
@@ -270,14 +283,14 @@ class HomePage extends StatelessWidget {
                         const SizedBox(
                           width: 8,
                         ),
-                        const BodyText(
+                        BodyText(
                           'Olá, ',
-                          color: CustomTheme.primaryTextColor,
+                          color: context.theme.textTheme.headline1?.color,
                         ),
                         BodyText(
                           StringUtils.getFirstName(
                               _storageService.user.value?.name),
-                          color: CustomTheme.primaryTextColor,
+                          color: context.theme.textTheme.headline1?.color,
                           fontWeight: FontWeight.w700,
                         ),
                       ],
@@ -318,9 +331,10 @@ class HomePage extends StatelessWidget {
               Expanded(
                 child: TextInput(
                   hintText: 'Nome',
-                  prefixIcon: const Icon(
+                  prefixIcon: Icon(
                     Icons.search,
                     size: 20,
+                    color: context.theme.textTheme.bodyText1?.color,
                   ),
                   onChanged: (value) {
                     _controller.departmentName.value = value;

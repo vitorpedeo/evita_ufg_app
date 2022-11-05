@@ -38,6 +38,7 @@ class LoginPage extends StatelessWidget {
     bool isKeyboardOpen = Get.mediaQuery.viewInsets.bottom > 0;
 
     return Scaffold(
+      backgroundColor: context.theme.backgroundColor,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -181,9 +182,9 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                const BodyText(
+                BodyText(
                   'Não tem uma conta?',
-                  color: CustomTheme.tertiaryTextColor,
+                  color: context.theme.textTheme.bodyText2?.color,
                 ),
                 TextButton(
                   onPressed: () {

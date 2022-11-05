@@ -1,3 +1,6 @@
+// Flutter imports:
+import 'package:flutter/foundation.dart';
+
 // Package imports:
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
@@ -9,29 +12,30 @@ class ApiService {
   final _storageService = Get.find<StorageService>();
 
   Dio getApi({bool needTokenAuth = false}) {
-    if (needTokenAuth) {
-      String? token = _storageService.token.value;
+    final BaseOptions options = BaseOptions(
+      baseUrl: 'https://evita-ufg-api-staging.up.railway.app/api',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
 
-      return Dio(
-        BaseOptions(
-          baseUrl: 'http://192.168.0.169:5000/api',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer $token',
-          },
-        ),
-      );
+    if (needTokenAuth) {
+      final String? token = _storageService.token.value;
+
+      options.headers.addAll({'Authorization': 'Bearer $token'});
     }
 
-    return Dio(
-      BaseOptions(
-        baseUrl: 'http://192.168.0.169:5000/api',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      ),
-    );
+    final Dio dio = Dio(options);
+
+    if (kDebugMode) {
+      dio.interceptors.add(LogInterceptor(
+        responseBody: true,
+        requestBody: false,
+        responseHeader: true,
+      ));
+    }
+
+    return dio;
   }
 }

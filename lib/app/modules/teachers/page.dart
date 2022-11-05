@@ -14,6 +14,7 @@ import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/app/widgets/teacher_avatar.dart';
 import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
+import 'package:evita_ufg_app/core/theme/shimmer_colors.dart';
 
 class TeachersPage extends StatelessWidget {
   final _controller = Get.find<TeachersController>();
@@ -23,6 +24,7 @@ class TeachersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.backgroundColor,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -54,13 +56,14 @@ class TeachersPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
+          baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+          highlightColor:
+              context.theme.extension<ShimmerColors>()!.highlightColor!,
           child: Container(
             width: 96,
             height: 48,
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: context.theme.extension<ShimmerColors>()!.baseColor!,
               borderRadius: const BorderRadius.all(
                 Radius.circular(6),
               ),
@@ -72,12 +75,13 @@ class TeachersPage extends StatelessWidget {
             top: 32,
           ),
           child: Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
+            baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+            highlightColor:
+                context.theme.extension<ShimmerColors>()!.highlightColor!,
             child: Container(
               height: 32,
               decoration: BoxDecoration(
-                color: Colors.grey.shade300,
+                color: context.theme.extension<ShimmerColors>()!.baseColor!,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(6),
                 ),
@@ -91,12 +95,13 @@ class TeachersPage extends StatelessWidget {
             bottom: 24,
           ),
           child: Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
+            baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+            highlightColor:
+                context.theme.extension<ShimmerColors>()!.highlightColor!,
             child: Container(
               height: 40,
               decoration: BoxDecoration(
-                color: Colors.grey.shade300,
+                color: context.theme.extension<ShimmerColors>()!.baseColor!,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(6),
                 ),
@@ -108,15 +113,16 @@ class TeachersPage extends StatelessWidget {
           children: [
             Expanded(
               child: Shimmer.fromColors(
-                baseColor: Colors.grey.shade300,
-                highlightColor: Colors.grey.shade100,
+                baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+                highlightColor:
+                    context.theme.extension<ShimmerColors>()!.highlightColor!,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                   ),
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: context.theme.extension<ShimmerColors>()!.baseColor!,
                     borderRadius: const BorderRadius.all(
                       Radius.circular(6),
                     ),
@@ -141,15 +147,18 @@ class TeachersPage extends StatelessWidget {
               },
               itemBuilder: (context, index) {
                 return Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
+                  baseColor:
+                      context.theme.extension<ShimmerColors>()!.baseColor!,
+                  highlightColor:
+                      context.theme.extension<ShimmerColors>()!.highlightColor!,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
                     ),
                     height: 80,
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
+                      color:
+                          context.theme.extension<ShimmerColors>()!.baseColor!,
                       borderRadius: const BorderRadius.all(
                         Radius.circular(6),
                       ),
@@ -273,9 +282,10 @@ class TeachersPage extends StatelessWidget {
 
                         _controller.handleFilter();
                       },
-                      prefixIcon: const Icon(
+                      prefixIcon: Icon(
                         Icons.search,
                         size: 20,
+                        color: context.theme.textTheme.bodyText1?.color,
                       ),
                     ),
                   ),
@@ -316,16 +326,16 @@ class TeachersPage extends StatelessWidget {
                             TextSpan(
                               text:
                                   '${_controller.filteredTeachers[index].rating.toString()} ',
-                              style: const TextStyle(
-                                color: CustomTheme.primaryTextColor,
+                              style: TextStyle(
+                                color: context.theme.textTheme.headline1?.color,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
                             TextSpan(
                               text:
                                   '(${_controller.filteredTeachers[index].evaluations.toString()})',
-                              style: const TextStyle(
-                                color: CustomTheme.secondaryTextColor,
+                              style: TextStyle(
+                                color: context.theme.textTheme.bodyText1?.color,
                               ),
                             ),
                           ],

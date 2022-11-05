@@ -11,9 +11,9 @@ import 'package:evita_ufg_app/app/widgets/app_button.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/app/widgets/star_input.dart';
+import 'package:evita_ufg_app/app/widgets/teacher_avatar.dart';
 import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
-import 'package:evita_ufg_app/core/utils/string_utils.dart';
 
 class EditEvaluationPage extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
@@ -38,6 +38,7 @@ class EditEvaluationPage extends StatelessWidget {
     bool isKeyboardOpen = Get.mediaQuery.viewInsets.bottom > 0;
 
     return Scaffold(
+      backgroundColor: context.theme.backgroundColor,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -82,24 +83,9 @@ class EditEvaluationPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Container(
-                                  width: 56,
-                                  height: 56,
-                                  decoration: const BoxDecoration(
-                                    color: CustomTheme.accentColor,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      StringUtils.getFirstLetter(
-                                          _controller.teacher?.name),
-                                      style: const TextStyle(
-                                        color: CustomTheme.primaryColor,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
+                                TeacherAvatar(
+                                  teacher: _controller.teacher,
+                                  size: TeacherAvatarSize.large,
                                 ),
                                 const SizedBox(
                                   height: 12,
@@ -114,7 +100,8 @@ class EditEvaluationPage extends StatelessWidget {
                                 ),
                                 BodyText(
                                   _controller.teacher?.email ?? '---',
-                                  color: CustomTheme.primaryTextColor,
+                                  color:
+                                      context.theme.textTheme.headline1?.color,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
                                 ),

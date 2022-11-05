@@ -15,6 +15,7 @@ import 'package:evita_ufg_app/app/widgets/error_feedback.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/app/widgets/teacher_avatar.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
+import 'package:evita_ufg_app/core/theme/shimmer_colors.dart';
 
 class TeacherPage extends StatelessWidget {
   final _controller = Get.find<TeacherController>();
@@ -25,6 +26,7 @@ class TeacherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.backgroundColor,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -56,13 +58,14 @@ class TeacherPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
+          baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+          highlightColor:
+              context.theme.extension<ShimmerColors>()!.highlightColor!,
           child: Container(
             width: 96,
             height: 48,
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: context.theme.extension<ShimmerColors>()!.baseColor!,
               borderRadius: const BorderRadius.all(
                 Radius.circular(6),
               ),
@@ -78,13 +81,14 @@ class TeacherPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Shimmer.fromColors(
-                baseColor: Colors.grey.shade300,
-                highlightColor: Colors.grey.shade100,
+                baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+                highlightColor:
+                    context.theme.extension<ShimmerColors>()!.highlightColor!,
                 child: Container(
                   width: 56,
                   height: 56,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: context.theme.extension<ShimmerColors>()!.baseColor!,
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -93,12 +97,13 @@ class TeacherPage extends StatelessWidget {
                 height: 12,
               ),
               Shimmer.fromColors(
-                baseColor: Colors.grey.shade300,
-                highlightColor: Colors.grey.shade100,
+                baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+                highlightColor:
+                    context.theme.extension<ShimmerColors>()!.highlightColor!,
                 child: Container(
                   height: 20,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: context.theme.extension<ShimmerColors>()!.baseColor!,
                     borderRadius: const BorderRadius.all(
                       Radius.circular(6),
                     ),
@@ -112,13 +117,18 @@ class TeacherPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Shimmer.fromColors(
-                    baseColor: Colors.grey.shade300,
-                    highlightColor: Colors.grey.shade100,
+                    baseColor:
+                        context.theme.extension<ShimmerColors>()!.baseColor!,
+                    highlightColor: context.theme
+                        .extension<ShimmerColors>()!
+                        .highlightColor!,
                     child: Container(
                       width: 160,
                       height: 16,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
+                        color: context.theme
+                            .extension<ShimmerColors>()!
+                            .baseColor!,
                         borderRadius: const BorderRadius.all(
                           Radius.circular(6),
                         ),
@@ -134,13 +144,18 @@ class TeacherPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Shimmer.fromColors(
-                    baseColor: Colors.grey.shade300,
-                    highlightColor: Colors.grey.shade100,
+                    baseColor:
+                        context.theme.extension<ShimmerColors>()!.baseColor!,
+                    highlightColor: context.theme
+                        .extension<ShimmerColors>()!
+                        .highlightColor!,
                     child: Container(
                       width: 240,
                       height: 16,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
+                        color: context.theme
+                            .extension<ShimmerColors>()!
+                            .baseColor!,
                         borderRadius: const BorderRadius.all(
                           Radius.circular(6),
                         ),
@@ -156,13 +171,18 @@ class TeacherPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Shimmer.fromColors(
-                    baseColor: Colors.grey.shade300,
-                    highlightColor: Colors.grey.shade100,
+                    baseColor:
+                        context.theme.extension<ShimmerColors>()!.baseColor!,
+                    highlightColor: context.theme
+                        .extension<ShimmerColors>()!
+                        .highlightColor!,
                     child: Container(
                       width: 160,
                       height: 20,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
+                        color: context.theme
+                            .extension<ShimmerColors>()!
+                            .baseColor!,
                         borderRadius: const BorderRadius.all(
                           Radius.circular(6),
                         ),
@@ -178,13 +198,14 @@ class TeacherPage extends StatelessWidget {
           height: 32,
         ),
         Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
+          baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+          highlightColor:
+              context.theme.extension<ShimmerColors>()!.highlightColor!,
           child: Container(
             width: 128,
             height: 20,
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: context.theme.extension<ShimmerColors>()!.baseColor!,
               borderRadius: const BorderRadius.all(
                 Radius.circular(6),
               ),
@@ -206,15 +227,18 @@ class TeacherPage extends StatelessWidget {
               },
               itemBuilder: (context, index) {
                 return Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
+                  baseColor:
+                      context.theme.extension<ShimmerColors>()!.baseColor!,
+                  highlightColor:
+                      context.theme.extension<ShimmerColors>()!.highlightColor!,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
                     ),
                     height: 120,
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
+                      color:
+                          context.theme.extension<ShimmerColors>()!.baseColor!,
                       borderRadius: const BorderRadius.all(
                         Radius.circular(6),
                       ),
@@ -226,12 +250,13 @@ class TeacherPage extends StatelessWidget {
           ),
         ),
         Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
+          baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+          highlightColor:
+              context.theme.extension<ShimmerColors>()!.highlightColor!,
           child: Container(
             height: 40,
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: context.theme.extension<ShimmerColors>()!.baseColor!,
               borderRadius: const BorderRadius.all(
                 Radius.circular(6),
               ),
@@ -309,7 +334,7 @@ class TeacherPage extends StatelessWidget {
               ),
               BodyText(
                 _controller.teacher.value?.email ?? '---',
-                color: CustomTheme.primaryTextColor,
+                color: context.theme.textTheme.headline1?.color,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
                 textAlign: TextAlign.center,
@@ -344,16 +369,16 @@ class TeacherPage extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: '${_controller.teacher.value?.rating} ',
-                          style: const TextStyle(
-                            color: CustomTheme.primaryTextColor,
+                          style: TextStyle(
+                            color: context.theme.textTheme.headline1?.color,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
                         TextSpan(
                           text:
                               '(${_controller.teacher.value?.evaluations} $evaluationsString)',
-                          style: const TextStyle(
-                            color: CustomTheme.secondaryTextColor,
+                          style: TextStyle(
+                            color: context.theme.textTheme.bodyText1?.color,
                           ),
                         ),
                       ],
