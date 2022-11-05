@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// Package imports:
+import 'package:get/get.dart';
+
 // Project imports:
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
@@ -83,7 +86,7 @@ class TextInput extends StatelessWidget {
             children: [
               BodyText(
                 label!,
-                color: CustomTheme.tertiaryTextColor,
+                color: context.theme.textTheme.bodyText2?.color,
               ),
               const SizedBox(
                 height: 8,
@@ -94,6 +97,7 @@ class TextInput extends StatelessWidget {
                 decoration: decoration ??
                     InputDecoration(
                       hintText: hintText,
+                      hintStyle: context.theme.inputDecorationTheme.hintStyle,
                       prefixIcon: prefixIcon,
                       prefixIconColor: CustomTheme.secondaryTextColor,
                       suffixIcon: suffixIcon,
@@ -115,7 +119,7 @@ class TextInput extends StatelessWidget {
                       isDense: true,
                       contentPadding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                       filled: true,
-                      fillColor: const Color.fromRGBO(237, 242, 247, 1),
+                      fillColor: context.theme.inputDecorationTheme.fillColor,
                       border: const OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.all(
@@ -133,8 +137,9 @@ class TextInput extends StatelessWidget {
                 textCapitalization:
                     textCapitalization ?? TextCapitalization.none,
                 style: style ??
-                    const TextStyle(
-                      color: CustomTheme.primaryTextColor,
+                    TextStyle(
+                      color: context.theme.textTheme.headline1?.color,
+                      fontFamily: CustomTheme.fontFamily,
                       fontSize: 14,
                     ),
                 textAlign: textAlign ?? TextAlign.start,
@@ -164,6 +169,7 @@ class TextInput extends StatelessWidget {
             decoration: decoration ??
                 InputDecoration(
                   hintText: hintText,
+                  hintStyle: context.theme.inputDecorationTheme.hintStyle,
                   prefixIcon: prefixIcon,
                   prefixIconColor: CustomTheme.secondaryTextColor,
                   suffixIcon: suffixIcon,
@@ -185,7 +191,7 @@ class TextInput extends StatelessWidget {
                   isDense: true,
                   contentPadding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                   filled: true,
-                  fillColor: const Color.fromRGBO(237, 242, 247, 1),
+                  fillColor: context.theme.inputDecorationTheme.fillColor,
                   border: const OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.all(
@@ -202,8 +208,9 @@ class TextInput extends StatelessWidget {
             textInputAction: textInputAction,
             textCapitalization: textCapitalization ?? TextCapitalization.none,
             style: style ??
-                const TextStyle(
-                  color: CustomTheme.primaryTextColor,
+                TextStyle(
+                  color: context.theme.textTheme.headline1?.color,
+                  fontFamily: CustomTheme.fontFamily,
                   fontSize: 14,
                 ),
             textAlign: textAlign ?? TextAlign.start,

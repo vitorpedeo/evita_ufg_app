@@ -31,9 +31,9 @@ class CommentCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       width: MediaQuery.of(context).size.width,
-      decoration: const BoxDecoration(
-        color: Color.fromRGBO(237, 242, 247, 1),
-        borderRadius: BorderRadius.all(
+      decoration: BoxDecoration(
+        color: context.theme.inputDecorationTheme.fillColor,
+        borderRadius: const BorderRadius.all(
           Radius.circular(6),
         ),
       ),
@@ -64,7 +64,7 @@ class CommentCard extends StatelessWidget {
                     children: [
                       BodyText(
                         comment?.user?.name ?? '---',
-                        color: CustomTheme.primaryTextColor,
+                        color: context.theme.textTheme.headline1?.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
                       ),
@@ -81,7 +81,7 @@ class CommentCard extends StatelessWidget {
                       ),
                       BodyText(
                         comment?.rating.toString() ?? '---',
-                        color: CustomTheme.primaryTextColor,
+                        color: context.theme.textTheme.headline1?.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
                       ),

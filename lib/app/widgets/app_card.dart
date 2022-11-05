@@ -1,6 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:get/get.dart';
+
 // Project imports:
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
@@ -31,9 +34,9 @@ class AppCard extends StatelessWidget {
           ),
           width: MediaQuery.of(context).size.width,
           height: 80,
-          decoration: const BoxDecoration(
-            color: Color.fromRGBO(236, 242, 247, 1),
-            borderRadius: BorderRadius.all(
+          decoration: BoxDecoration(
+            color: context.theme.inputDecorationTheme.fillColor,
+            borderRadius: const BorderRadius.all(
               Radius.circular(6),
             ),
           ),
