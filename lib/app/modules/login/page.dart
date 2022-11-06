@@ -178,7 +178,9 @@ class LoginPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const GoogleLoginButton(),
+                GoogleLoginButton(
+                  onPressed: _controller.handleGoogleLogin,
+                ),
                 const SizedBox(
                   height: 24,
                 ),

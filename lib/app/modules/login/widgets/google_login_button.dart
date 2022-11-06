@@ -9,7 +9,12 @@ import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class GoogleLoginButton extends StatelessWidget {
-  const GoogleLoginButton({super.key});
+  final void Function() onPressed;
+
+  const GoogleLoginButton({
+    super.key,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,7 @@ class GoogleLoginButton extends StatelessWidget {
       height: 40,
       color: const Color.fromRGBO(66, 133, 244, 1),
       highlightColor: CustomTheme.accentColor,
-      onPressed: () {},
+      onPressed: onPressed,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(6),
       ),
