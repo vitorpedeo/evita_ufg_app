@@ -23,4 +23,20 @@ class LoginRepository {
       }
     }
   }
+
+  Future<AuthModel> postGoogleLogin(Map<String, dynamic> data) async {
+    try {
+      Response response =
+          await _apiService.getApi().post('/auth/google-login', data: data);
+      var body = response.data;
+
+      return AuthModel.fromJson(body);
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw e.response!.data['message'];
+      } else {
+        throw e.message;
+      }
+    }
+  }
 }
