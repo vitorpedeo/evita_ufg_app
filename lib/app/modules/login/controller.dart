@@ -49,24 +49,26 @@ class LoginController extends GetxController {
     try {
       final GoogleSignInAccount? googleAccount = await _googleSignIn.signIn();
 
-      final Map<String, dynamic> data = {
-        'id': googleAccount?.id,
-        'name': googleAccount?.displayName,
-        'email': googleAccount?.email,
-        'avatar_url': googleAccount?.photoUrl,
-      };
+      if (googleAccount != null) {
+        final Map<String, dynamic> data = {
+          'id': googleAccount.id,
+          'name': googleAccount.displayName,
+          'email': googleAccount.email,
+          'avatar_url': googleAccount.photoUrl,
+        };
 
-      final AuthModel auth = await _repository.postGoogleLogin(data);
-      await _storageService.setUser(auth.user);
-      await _storageService.setToken(auth.token);
-      await _storageService.setAuthenticated(true);
+        final AuthModel auth = await _repository.postGoogleLogin(data);
+        await _storageService.setUser(auth.user);
+        await _storageService.setToken(auth.token);
+        await _storageService.setAuthenticated(true);
 
-      CustomSnack.show(
-        message: 'Bem vindo!',
-        type: CustomSnackType.success,
-      );
+        CustomSnack.show(
+          message: 'Bem vindo!',
+          type: CustomSnackType.success,
+        );
 
-      Get.offAllNamed('/home');
+        Get.offAllNamed('/home');
+      }
     } catch (e) {
       CustomSnack.show(
         message: e.toString(),
