@@ -1,8 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Project imports:
-import 'package:evita_ufg_app/core/theme/custom.dart';
+// Package imports:
+import 'package:get/get.dart';
 
 class SelectInput<T> extends StatelessWidget {
   final List<T> items;
@@ -28,9 +28,9 @@ class SelectInput<T> extends StatelessWidget {
           horizontal: 16,
         ),
         height: 50,
-        decoration: const BoxDecoration(
-          color: Color.fromRGBO(237, 242, 247, 1),
-          borderRadius: BorderRadius.all(
+        decoration: BoxDecoration(
+          color: context.theme.inputDecorationTheme.fillColor,
+          borderRadius: const BorderRadius.all(
             Radius.circular(6),
           ),
         ),
@@ -46,13 +46,14 @@ class SelectInput<T> extends StatelessWidget {
           isDense: true,
           isExpanded: true,
           hint: Text(hint ?? ''),
-          style: const TextStyle(
-            color: CustomTheme.primaryTextColor,
+          dropdownColor: context.theme.backgroundColor,
+          style: TextStyle(
+            color: context.theme.textTheme.headline1?.color,
             fontSize: 14,
           ),
-          icon: const Icon(
+          icon: Icon(
             Icons.keyboard_arrow_down_outlined,
-            color: CustomTheme.secondaryTextColor,
+            color: context.theme.textTheme.bodyText1?.color,
           ),
         ),
       ),

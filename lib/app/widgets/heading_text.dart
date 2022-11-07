@@ -5,10 +5,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-// Project imports:
-import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class HeadingText extends StatelessWidget {
   final String text;
@@ -79,9 +77,9 @@ class HeadingText extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.inter(
-        color: color ?? CustomTheme.primaryTextColor,
-        fontSize: fontSize ?? 24,
-        fontWeight: fontWeight ?? FontWeight.w700,
+        color: color ?? context.theme.textTheme.headline1?.color,
+        fontSize: fontSize ?? context.theme.textTheme.headline1?.fontSize,
+        fontWeight: fontWeight ?? context.theme.textTheme.headline1?.fontWeight,
         backgroundColor: backgroundColor,
         fontStyle: fontStyle,
         letterSpacing: letterSpacing,

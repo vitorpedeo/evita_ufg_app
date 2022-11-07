@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
@@ -23,9 +24,9 @@ class StarInput extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const BodyText(
+            BodyText(
               'Nota',
-              color: CustomTheme.tertiaryTextColor,
+              color: context.theme.textTheme.bodyText2?.color,
             ),
             const SizedBox(
               height: 8,

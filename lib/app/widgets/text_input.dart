@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// Package imports:
+import 'package:get/get.dart';
+
 // Project imports:
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
@@ -14,6 +17,7 @@ class TextInput extends StatelessWidget {
   final String? hintText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final String? errorText;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final TextCapitalization? textCapitalization;
@@ -29,6 +33,7 @@ class TextInput extends StatelessWidget {
   final bool? readOnly;
   final bool? showCursor;
   final int? maxLength;
+  final String? initialValue;
   final ValueChanged<String>? onChanged;
   final VoidCallback? onEditingComplete;
   final ValueChanged<String>? onSubmitted;
@@ -47,6 +52,7 @@ class TextInput extends StatelessWidget {
       this.hintText,
       this.prefixIcon,
       this.suffixIcon,
+      this.errorText,
       this.keyboardType,
       this.textInputAction,
       this.textCapitalization,
@@ -62,6 +68,7 @@ class TextInput extends StatelessWidget {
       this.readOnly,
       this.showCursor,
       this.maxLength,
+      this.initialValue,
       this.onChanged,
       this.onEditingComplete,
       this.onSubmitted,
@@ -79,25 +86,40 @@ class TextInput extends StatelessWidget {
             children: [
               BodyText(
                 label!,
-                color: CustomTheme.tertiaryTextColor,
+                color: context.theme.textTheme.bodyText2?.color,
               ),
               const SizedBox(
                 height: 8,
               ),
-              TextField(
+              TextFormField(
                 controller: controller,
                 focusNode: focusNode,
                 decoration: decoration ??
                     InputDecoration(
                       hintText: hintText,
+                      hintStyle: context.theme.inputDecorationTheme.hintStyle,
                       prefixIcon: prefixIcon,
                       prefixIconColor: CustomTheme.secondaryTextColor,
                       suffixIcon: suffixIcon,
                       suffixIconColor: CustomTheme.secondaryTextColor,
+                      errorText: errorText,
+                      errorStyle: const TextStyle(
+                        color: CustomTheme.redColor,
+                      ),
+                      errorBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: CustomTheme.redColor,
+                        ),
+                      ),
+                      focusedErrorBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: CustomTheme.redColor,
+                        ),
+                      ),
                       isDense: true,
                       contentPadding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                       filled: true,
-                      fillColor: const Color.fromRGBO(237, 242, 247, 1),
+                      fillColor: context.theme.inputDecorationTheme.fillColor,
                       border: const OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.all(
@@ -115,8 +137,9 @@ class TextInput extends StatelessWidget {
                 textCapitalization:
                     textCapitalization ?? TextCapitalization.none,
                 style: style ??
-                    const TextStyle(
-                      color: CustomTheme.primaryTextColor,
+                    TextStyle(
+                      color: context.theme.textTheme.headline1?.color,
+                      fontFamily: CustomTheme.fontFamily,
                       fontSize: 14,
                     ),
                 textAlign: textAlign ?? TextAlign.start,
@@ -130,10 +153,9 @@ class TextInput extends StatelessWidget {
                 readOnly: readOnly ?? false,
                 showCursor: showCursor,
                 maxLength: maxLength,
+                initialValue: initialValue,
                 onChanged: onChanged,
                 onEditingComplete: onEditingComplete,
-                onSubmitted: onSubmitted,
-                onAppPrivateCommand: onAppPrivateCommand,
                 inputFormatters: inputFormatters,
                 enabled: enabled,
                 keyboardAppearance: keyboardAppearance,
@@ -141,20 +163,35 @@ class TextInput extends StatelessWidget {
               ),
             ],
           )
-        : TextField(
+        : TextFormField(
             controller: controller,
             focusNode: focusNode,
             decoration: decoration ??
                 InputDecoration(
                   hintText: hintText,
+                  hintStyle: context.theme.inputDecorationTheme.hintStyle,
                   prefixIcon: prefixIcon,
                   prefixIconColor: CustomTheme.secondaryTextColor,
                   suffixIcon: suffixIcon,
                   suffixIconColor: CustomTheme.secondaryTextColor,
+                  errorText: errorText,
+                  errorStyle: const TextStyle(
+                    color: CustomTheme.redColor,
+                  ),
+                  errorBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: CustomTheme.redColor,
+                    ),
+                  ),
+                  focusedErrorBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: CustomTheme.redColor,
+                    ),
+                  ),
                   isDense: true,
                   contentPadding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                   filled: true,
-                  fillColor: const Color.fromRGBO(237, 242, 247, 1),
+                  fillColor: context.theme.inputDecorationTheme.fillColor,
                   border: const OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.all(
@@ -171,8 +208,9 @@ class TextInput extends StatelessWidget {
             textInputAction: textInputAction,
             textCapitalization: textCapitalization ?? TextCapitalization.none,
             style: style ??
-                const TextStyle(
-                  color: CustomTheme.primaryTextColor,
+                TextStyle(
+                  color: context.theme.textTheme.headline1?.color,
+                  fontFamily: CustomTheme.fontFamily,
                   fontSize: 14,
                 ),
             textAlign: textAlign ?? TextAlign.start,
@@ -186,10 +224,9 @@ class TextInput extends StatelessWidget {
             readOnly: readOnly ?? false,
             showCursor: showCursor,
             maxLength: maxLength,
+            initialValue: initialValue,
             onChanged: onChanged,
             onEditingComplete: onEditingComplete,
-            onSubmitted: onSubmitted,
-            onAppPrivateCommand: onAppPrivateCommand,
             inputFormatters: inputFormatters,
             enabled: enabled,
             keyboardAppearance: keyboardAppearance,

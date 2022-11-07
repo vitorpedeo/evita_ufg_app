@@ -23,37 +23,37 @@ class Pages {
     GetPage(
       name: Routes.login,
       binding: LoginBinding(),
-      page: () => const LoginPage(),
+      page: () => LoginPage(),
     ),
     GetPage(
       name: Routes.createAccount,
       binding: CreateAccountBinding(),
-      page: () => const CreateAccountPage(),
+      page: () => CreateAccountPage(),
     ),
     GetPage(
       name: Routes.home,
       binding: HomeBinding(),
-      page: () => const HomePage(),
+      page: () => HomePage(),
     ),
     GetPage(
       name: Routes.teachers,
       binding: TeachersBinding(),
-      page: () => const TeachersPage(),
+      page: () => TeachersPage(),
     ),
     GetPage(
       name: Routes.teacher,
       binding: TeacherBinding(),
-      page: () => const TeacherPage(),
+      page: () => TeacherPage(),
     ),
     GetPage(
       name: Routes.createEvaluation,
       binding: CreateEvaluationBinding(),
-      page: () => const CreateEvaluationPage(),
+      page: () => CreateEvaluationPage(),
     ),
     GetPage(
       name: Routes.editEvaluation,
       binding: EditEvaluationBinding(),
-      page: () => const EditEvaluationPage(),
+      page: () => EditEvaluationPage(),
     ),
   ];
 }

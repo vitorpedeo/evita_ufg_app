@@ -1,19 +1,22 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:get/get.dart';
+
 // Project imports:
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class AppCard extends StatelessWidget {
-  final Widget icon;
+  final Widget leading;
   final String title;
   final Widget subtitle;
   final void Function() onTap;
 
   const AppCard(
       {super.key,
-      required this.icon,
+      required this.leading,
       required this.title,
       required this.subtitle,
       required this.onTap});
@@ -31,25 +34,15 @@ class AppCard extends StatelessWidget {
           ),
           width: MediaQuery.of(context).size.width,
           height: 80,
-          decoration: const BoxDecoration(
-            color: Color.fromRGBO(236, 242, 247, 1),
-            borderRadius: BorderRadius.all(
+          decoration: BoxDecoration(
+            color: context.theme.inputDecorationTheme.fillColor,
+            borderRadius: const BorderRadius.all(
               Radius.circular(6),
             ),
           ),
           child: Row(
             children: [
-              Container(
-                width: 48,
-                height: 48,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: CustomTheme.accentColor,
-                ),
-                child: Center(
-                  child: icon,
-                ),
-              ),
+              leading,
               const SizedBox(
                 width: 16,
               ),

@@ -5,10 +5,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-// Project imports:
-import 'package:evita_ufg_app/core/theme/custom.dart';
 
 class BodyText extends StatelessWidget {
   final String text;
@@ -79,9 +77,9 @@ class BodyText extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.inter(
-        color: color ?? CustomTheme.secondaryTextColor,
-        fontSize: fontSize ?? 14,
-        fontWeight: fontWeight ?? FontWeight.w400,
+        color: color ?? context.theme.textTheme.bodyText1?.color,
+        fontSize: fontSize ?? context.theme.textTheme.bodyText1?.fontSize,
+        fontWeight: fontWeight ?? context.theme.textTheme.bodyText1?.fontWeight,
         backgroundColor: backgroundColor,
         fontStyle: fontStyle,
         letterSpacing: letterSpacing,
