@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:evita_ufg_app/app/modules/home/widgets/home_drawer.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -6,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
 // Project imports:
-import 'package:evita_ufg_app/app/data/services/storage.dart';
 import 'package:evita_ufg_app/app/modules/home/controller.dart';
 import 'package:evita_ufg_app/app/widgets/app_card.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
@@ -16,17 +16,19 @@ import 'package:evita_ufg_app/app/widgets/select_input.dart';
 import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 import 'package:evita_ufg_app/core/theme/shimmer_colors.dart';
-import 'package:evita_ufg_app/core/utils/string_utils.dart';
 
 class HomePage extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   final _controller = Get.find<HomeController>();
-  final _storageService = Get.find<StorageService>();
 
   HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: HomeDrawer(),
       backgroundColor: context.theme.backgroundColor,
       body: SafeArea(
         child: Container(
@@ -261,48 +263,15 @@ class HomePage extends StatelessWidget {
       children: [
         !isKeyboardOpen
             ? Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Obx(
-                    () => Row(
-                      children: [
-                        _storageService.user.value?.avatarUrl != null
-                            ? CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                  _storageService.user.value!.avatarUrl!,
-                                ),
-                              )
-                            : const CircleAvatar(
-                                backgroundColor: CustomTheme.accentColor,
-                                child: Icon(
-                                  Icons.person,
-                                  color: CustomTheme.primaryColor,
-                                ),
-                              ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        BodyText(
-                          'Olá, ',
-                          color: context.theme.textTheme.headline1?.color,
-                        ),
-                        BodyText(
-                          StringUtils.getFirstName(
-                              _storageService.user.value?.name),
-                          color: context.theme.textTheme.headline1?.color,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ],
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      _controller.logout();
+                  GestureDetector(
+                    onTap: () {
+                      _scaffoldKey.currentState!.openDrawer();
                     },
-                    icon: const Icon(
-                      Icons.logout,
-                      color: CustomTheme.primaryColor,
+                    child: Icon(
+                      Icons.menu_rounded,
+                      size: 32,
+                      color: context.theme.textTheme.headline1?.color,
                     ),
                   ),
                 ],
@@ -331,6 +300,7 @@ class HomePage extends StatelessWidget {
               Expanded(
                 child: TextInput(
                   hintText: 'Nome',
+                  textInputAction: TextInputAction.done,
                   prefixIcon: Icon(
                     Icons.search,
                     size: 20,
