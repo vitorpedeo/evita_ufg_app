@@ -1,9 +1,10 @@
 // Package imports:
+import 'package:evita_ufg_app/app/modules/create_account/pages/terms_of_use_page.dart';
 import 'package:get/get.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/modules/create_account/binding.dart';
-import 'package:evita_ufg_app/app/modules/create_account/page.dart';
+import 'package:evita_ufg_app/app/modules/create_account/pages/create_account_page.dart';
 import 'package:evita_ufg_app/app/modules/create_evaluation/binding.dart';
 import 'package:evita_ufg_app/app/modules/create_evaluation/page.dart';
 import 'package:evita_ufg_app/app/modules/edit_evaluation/binding.dart';
@@ -29,6 +30,10 @@ class Pages {
       name: Routes.createAccount,
       binding: CreateAccountBinding(),
       page: () => CreateAccountPage(),
+    ),
+    GetPage(
+      name: Routes.termsOfUse,
+      page: () => const TermsOfUsePage(),
     ),
     GetPage(
       name: Routes.home,

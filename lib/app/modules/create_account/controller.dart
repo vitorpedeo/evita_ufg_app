@@ -9,6 +9,7 @@ class CreateAccountController extends GetxController {
   final CreateAccountRepository _repository = CreateAccountRepository();
 
   RxBool isLoading = false.obs;
+  bool hasAcceptedTerms = false;
 
   Future<void> handleNewAccount(Map<String, dynamic> data) async {
     try {

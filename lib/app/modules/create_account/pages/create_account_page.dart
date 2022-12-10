@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
+import 'package:evita_ufg_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -26,6 +28,14 @@ class CreateAccountPage extends StatelessWidget {
     FocusManager.instance.primaryFocus?.unfocus();
 
     if (_formKey.currentState!.validate()) {
+      if (!_controller.hasAcceptedTerms) {
+        CustomSnack.show(
+          message: 'É necessário aceitar os termos de uso!',
+          type: CustomSnackType.error,
+        );
+        return;
+      }
+
       Map<String, dynamic> formData = _formKey.currentState!.value;
 
       await _controller.handleNewAccount(formData);
@@ -97,6 +107,7 @@ class CreateAccountPage extends StatelessWidget {
                     'name': '',
                     'email': '',
                     'password': '',
+                    'isTermsAccepted': false,
                   },
                   child: Column(
                     children: [
@@ -163,6 +174,70 @@ class CreateAccountPage extends StatelessWidget {
                             hintText: 'Digite sua senha',
                             errorText: field.errorText,
                             onChanged: (value) => field.didChange(value),
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FormBuilderField<bool>(
+                        name: 'isTermsAccepted',
+                        builder: (field) {
+                          bool currentValue = field.value ?? false;
+
+                          return Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  field.didChange(!currentValue);
+                                  _controller.hasAcceptedTerms = !currentValue;
+                                },
+                                child: Container(
+                                    width: 24,
+                                    height: 24,
+                                    decoration: BoxDecoration(
+                                      color: currentValue
+                                          ? CustomTheme.primaryColor
+                                          : context.theme.inputDecorationTheme
+                                              .fillColor,
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: currentValue
+                                        ? const Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                            size: 16,
+                                          )
+                                        : null),
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    BodyText(
+                                      'Declaro que aceito os',
+                                      color: context
+                                          .theme.textTheme.bodyText2?.color,
+                                    ),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(Routes.termsOfUse);
+                                      },
+                                      child: const BodyText(
+                                        'termos de uso',
+                                        color: CustomTheme.primaryColor,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
                           );
                         },
                       ),
