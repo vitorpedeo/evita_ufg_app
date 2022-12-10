@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
+import 'package:evita_ufg_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -223,10 +224,15 @@ class CreateAccountPage extends StatelessWidget {
                                     const SizedBox(
                                       width: 4,
                                     ),
-                                    const BodyText(
-                                      'termos de uso',
-                                      color: CustomTheme.primaryColor,
-                                      fontWeight: FontWeight.w700,
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(Routes.termsOfUse);
+                                      },
+                                      child: const BodyText(
+                                        'termos de uso',
+                                        color: CustomTheme.primaryColor,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     )
                                   ],
                                 ),
