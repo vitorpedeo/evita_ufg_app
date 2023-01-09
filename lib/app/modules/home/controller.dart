@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/data/models/department.dart';
@@ -54,6 +55,17 @@ class HomeController extends GetxController {
     } finally {
       isLoadingDepartments(false);
     }
+  }
+
+  String formatAccountCreationDate(String? isoDate) {
+    if (isoDate == null) {
+      return '---';
+    }
+
+    final DateFormat formatter = DateFormat('dd/MM/yyyy');
+    final DateTime parsedDate = DateTime.parse(isoDate);
+
+    return formatter.format(parsedDate);
   }
 
   void handleFilter() {
