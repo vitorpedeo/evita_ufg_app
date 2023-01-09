@@ -41,11 +41,11 @@ flutter:
 
 flutter_native_splash:
   image: assets/images/splash_logo.png
-  color: "#ffffff"
+  color: "#0072b9"
   fullscreen: true
   android_12:
     image: assets/images/splash_logo.png
-    color: "#ffffff"
+    color: "#0072b9"
 
 flutter_icons:
   android: true
