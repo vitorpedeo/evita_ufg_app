@@ -35,7 +35,7 @@ jobs:
         run: flutter pub get
 
       - name: Build APK
-        run: flutter build apk --obfuscate --split-debug-info --no-pub --release --build-name=${{ inputs.version }} --build-number=${{ inputs.build_number }}  ${{ secrets.BUILD_VARIABLES }}"
+        run: flutter build apk --obfuscate --split-debug-info --no-pub --release --build-name=${{ inputs.version }} --build-number=${{ inputs.build_number }} ${{ secrets.BUILD_VARIABLES }}
 
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
