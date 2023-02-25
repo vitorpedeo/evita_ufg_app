@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>835688038221-2l0936ref7cpf1t0b1kvefsrgn8er8q2.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.835688038221-2l0936ref7cpf1t0b1kvefsrgn8er8q2</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>835688038221-2ske306fj5i3fji1et3okakiccmmtoqa.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCdH-8zHAFDm0YHqyqri1lZIwRdIQabgGU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>835688038221</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.evitaufg.app</string>
+	<key>PROJECT_ID</key>
+	<string>evita-ufg-4e5ce</string>
+	<key>STORAGE_BUCKET</key>
+	<string>evita-ufg-4e5ce.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:835688038221:ios:c48689beee31f752d90104</string>
+</dict>
+</plist>
