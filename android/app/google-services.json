@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "835688038221-pnbj3jfe2vu1rcdt3od3rh8l21fkl55p.apps.googleusercontent.com",
+          "client_id": "835688038221-gss1tenftif9kqp1ur5funeeihsokstl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.evitaufg.app",
-            "certificate_hash": "5daf64c09f11c68b5959da11dacfba09ece86f95"
+            "certificate_hash": "da96cb9b0fe77044b5d0ba4ac97ae55b8f139ce3"
           }
         },
         {
