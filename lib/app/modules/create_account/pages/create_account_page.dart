@@ -66,7 +66,30 @@ class CreateAccountPage extends StatelessWidget {
                 !isKeyboardOpen
                     ? Column(
                         children: [
-                          SizedBox(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              TextButton.icon(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                icon: const Icon(
+                                  Icons.keyboard_backspace_outlined,
+                                  size: 24,
+                                ),
+                                label: const BodyText(
+                                  'Voltar',
+                                  color: CustomTheme.primaryColor,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                              top: 32,
+                            ),
                             width: 80,
                             height: 80,
                             child: FittedBox(
