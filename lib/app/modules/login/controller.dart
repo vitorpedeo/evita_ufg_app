@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:evita_ufg_app/app/data/services/auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -24,10 +25,7 @@ class LoginController extends GetxController {
     try {
       isLoading(true);
 
-      AuthModel auth = await _repository.postLogin(data);
-      await _storageService.setUser(auth.user);
-      await _storageService.setToken(auth.token);
-      await _storageService.setAuthenticated(true);
+      await AuthService.instance.login(data);
 
       CustomSnack.show(
         message: 'Bem vindo!',

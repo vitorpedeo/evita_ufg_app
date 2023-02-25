@@ -1,4 +1,7 @@
 // Flutter imports:
+import 'package:evita_ufg_app/app/data/services/auth.dart';
+import 'package:evita_ufg_app/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -14,15 +17,28 @@ import 'package:evita_ufg_app/routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initServices();
+  initServices();
+  await initAsyncServices();
 
-  runApp(EvitaUFGApp());
+  runApp(const EvitaUFGApp());
 }
 
-Future<void> initServices() async {
-  await Get.putAsync(
-    () => StorageService().init(),
+void initServices() {
+  Get.lazyPut(
+    () => StorageService(),
   );
+  Get.lazyPut(
+    () => AuthService(),
+  );
+}
+
+Future<void> initAsyncServices() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  await StorageService.instance.initStorage();
+
   await Get.putAsync(
     () => ThemeService().init(),
   );
@@ -31,9 +47,7 @@ Future<void> initServices() async {
 }
 
 class EvitaUFGApp extends StatelessWidget {
-  final StorageService _storageService = Get.find<StorageService>();
-
-  EvitaUFGApp({super.key});
+  const EvitaUFGApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +56,9 @@ class EvitaUFGApp extends StatelessWidget {
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
       themeMode: ThemeMode.system,
-      initialRoute:
-          _storageService.authenticated.value ? Routes.home : Routes.login,
+      initialRoute: StorageService.instance.authenticated.value
+          ? Routes.home
+          : Routes.login,
       getPages: Pages.pages,
     );
   }

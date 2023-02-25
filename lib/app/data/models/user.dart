@@ -1,5 +1,5 @@
 class UserModel {
-  int? id;
+  String? id;
   String? name;
   String? avatarUrl;
   String? email;
@@ -32,6 +32,17 @@ class UserModel {
     data['avatar_url'] = avatarUrl;
     data['email'] = email;
     data['password'] = password;
+    data['created_at'] = createdAt;
+
+    return data;
+  }
+
+  Map<String, dynamic> toFirebaseJson() {
+    final data = <String, dynamic>{};
+
+    data['name'] = name;
+    data['avatar_url'] = avatarUrl;
+    data['email'] = email;
     data['created_at'] = createdAt;
 
     return data;
