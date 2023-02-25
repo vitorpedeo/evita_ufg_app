@@ -26,9 +26,11 @@ void main() async {
 void initServices() {
   Get.lazyPut(
     () => StorageService(),
+    fenix: true,
   );
   Get.lazyPut(
     () => AuthService(),
+    fenix: true,
   );
 }
 

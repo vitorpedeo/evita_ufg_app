@@ -33,12 +33,17 @@ class AuthRepository {
     }
   }
 
-  Future<UserModel> getUser({required String? id}) async {
+  Future<UserModel?> getUser({required String? id}) async {
     try {
       final DocumentReference userRef =
           _dbFirestore.collection('users').doc(id);
 
       final DocumentSnapshot snapshot = await userRef.get();
+
+      if (snapshot.data() == null) {
+        return null;
+      }
+
       final Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
 
       final UserModel user = UserModel(
