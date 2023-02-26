@@ -1,4 +1,4 @@
-import 'package:evita_ufg_app/app/data/services/storage.dart';
+import 'package:evita_ufg_app/app/data/services/auth.dart';
 import 'package:evita_ufg_app/app/data/services/theme.dart';
 import 'package:evita_ufg_app/app/modules/home/controller.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatelessWidget {
   final _controller = Get.find<HomeController>();
-  final _storageService = Get.find<StorageService>();
+  final _authService = AuthService.instance;
   final _themeService = Get.find<ThemeService>();
 
   HomeDrawer({super.key});
@@ -17,6 +17,7 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: Get.width * 0.8,
       backgroundColor: context.theme.backgroundColor,
       child: SafeArea(
         child: ListView(
@@ -33,10 +34,10 @@ class HomeDrawer extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  _storageService.user.value?.avatarUrl != null
+                  _authService.user.value?.avatarUrl != null
                       ? CircleAvatar(
                           backgroundImage: NetworkImage(
-                            _storageService.user.value!.avatarUrl!,
+                            _authService.user.value!.avatarUrl!,
                           ),
                           minRadius: 28,
                         )
@@ -55,14 +56,14 @@ class HomeDrawer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       HeadingText(
-                        _storageService.user.value?.name ?? '---',
+                        _authService.user.value?.name ?? '---',
                         fontSize: 16,
                       ),
                       const SizedBox(
                         height: 4,
                       ),
                       BodyText(
-                        'Conta criada em ${_controller.formatAccountCreationDate(_storageService.user.value?.createdAt)}',
+                        'Conta criada em ${_controller.formatAccountCreationDate(_authService.user.value?.createdAt)}',
                         fontSize: 12,
                       ),
                     ],

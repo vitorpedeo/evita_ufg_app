@@ -47,7 +47,7 @@ class AuthRepository {
       final Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
 
       final UserModel user = UserModel(
-        id: data['id'],
+        id: snapshot.id,
         name: data['name'],
         email: data['email'],
         avatarUrl: data['avatarUrl'],

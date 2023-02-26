@@ -17,6 +17,13 @@ class AuthService extends GetxController {
 
   static AuthService get instance => Get.find<AuthService>();
 
+  @override
+  void onInit() {
+    super.onInit();
+
+    getUserFromStorage();
+  }
+
   Future<bool> register(Map<String, dynamic> data) async {
     final String? name = data['name'];
     final String? email = data['email'];
@@ -241,6 +248,15 @@ class AuthService extends GetxController {
       );
 
       return false;
+    }
+  }
+
+  Future<void> getUserFromStorage() async {
+    UserModel? userFromStorage = await StorageService.instance.getUser();
+
+    if (userFromStorage != null) {
+      user.value = userFromStorage;
+      isAuthenticated.value = true;
     }
   }
 
