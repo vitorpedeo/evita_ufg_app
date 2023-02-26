@@ -222,7 +222,7 @@ class AuthService extends GetxController {
     }
   }
 
-  Future<void> logout() async {
+  Future<bool> logout() async {
     try {
       await _auth.signOut();
 
@@ -232,11 +232,15 @@ class AuthService extends GetxController {
       clearStorage();
 
       Get.offAllNamed(Routes.login);
+
+      return true;
     } catch (e) {
       CustomSnack.show(
         message: e.toString(),
         type: CustomSnackType.error,
       );
+
+      return false;
     }
   }
 

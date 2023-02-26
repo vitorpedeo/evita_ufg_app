@@ -1,5 +1,5 @@
 class DepartmentModel {
-  int? id;
+  String? id;
   String? name;
   String? regional;
 
