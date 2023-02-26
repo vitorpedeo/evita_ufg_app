@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:diacritic/diacritic.dart';
 import 'package:evita_ufg_app/app/data/services/auth.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -81,8 +82,8 @@ class HomeController extends GetxController {
         filteredDepartments.value = allDepartments
             .where(
               (department) =>
-                  department.name!.toLowerCase().contains(
-                        departmentName.value!.toLowerCase(),
+                  removeDiacritics(department.name!).toLowerCase().contains(
+                        removeDiacritics(departmentName.value!).toLowerCase(),
                       ) &&
                   department.regional!.toLowerCase() ==
                       selectedRegional.value.toLowerCase(),
@@ -95,9 +96,10 @@ class HomeController extends GetxController {
       } else {
         filteredDepartments.value = allDepartments
             .where(
-              (department) => department.name!.toLowerCase().contains(
-                    departmentName.value!.toLowerCase(),
-                  ),
+              (department) =>
+                  removeDiacritics(department.name!).toLowerCase().contains(
+                        removeDiacritics(departmentName.value!).toLowerCase(),
+                      ),
             )
             .toList();
       }
