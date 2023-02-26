@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:evita_ufg_app/app/data/services/auth.dart';
 import 'package:evita_ufg_app/app/data/services/theme.dart';
 import 'package:evita_ufg_app/app/modules/home/controller.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
+import 'package:evita_ufg_app/core/utils/string_utils.dart';
 import 'package:get/get.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:flutter/material.dart';
@@ -35,18 +37,68 @@ class HomeDrawer extends StatelessWidget {
               child: Row(
                 children: [
                   _authService.user.value?.avatarUrl != null
-                      ? CircleAvatar(
-                          backgroundImage: NetworkImage(
-                            _authService.user.value!.avatarUrl!,
-                          ),
-                          minRadius: 28,
+                      ? CachedNetworkImage(
+                          imageUrl: _authService.user.value!.avatarUrl!,
+                          imageBuilder: (context, imageProvider) {
+                            return CircleAvatar(
+                              radius: 28,
+                              backgroundImage: imageProvider,
+                            );
+                          },
+                          placeholder: (context, url) {
+                            return Container(
+                              width: 28,
+                              height: 28,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: CustomTheme.accentColor,
+                              ),
+                              child: Center(
+                                child: HeadingText(
+                                  StringUtils.getFirstLetter(
+                                    _authService.user.value!.name,
+                                  ),
+                                  color: CustomTheme.primaryColor,
+                                  fontSize: 24,
+                                ),
+                              ),
+                            );
+                          },
+                          errorWidget: (context, url, error) {
+                            return Container(
+                              width: 28,
+                              height: 28,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: CustomTheme.accentColor,
+                              ),
+                              child: Center(
+                                child: HeadingText(
+                                  StringUtils.getFirstLetter(
+                                    _authService.user.value!.name,
+                                  ),
+                                  color: CustomTheme.primaryColor,
+                                  fontSize: 24,
+                                ),
+                              ),
+                            );
+                          },
                         )
-                      : const CircleAvatar(
-                          backgroundColor: CustomTheme.accentColor,
-                          minRadius: 28,
-                          child: Icon(
-                            Icons.person,
-                            color: CustomTheme.primaryColor,
+                      : Container(
+                          width: 28,
+                          height: 28,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: CustomTheme.accentColor,
+                          ),
+                          child: Center(
+                            child: HeadingText(
+                              StringUtils.getFirstLetter(
+                                _authService.user.value!.name,
+                              ),
+                              color: CustomTheme.primaryColor,
+                              fontSize: 24,
+                            ),
                           ),
                         ),
                   const SizedBox(

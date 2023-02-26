@@ -1,31 +1,46 @@
 // Package imports:
-import 'package:dio/dio.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evita_ufg_app/app/data/database/db_firestore.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/data/models/teacher.dart';
-import 'package:evita_ufg_app/app/data/services/api.dart';
 
 class TeachersRepository {
-  final ApiService _apiService = ApiService();
+  final FirebaseFirestore _db = DBFirestore.get();
 
-  Future<List<TeacherModel>> getTeacherByDepartmentId(int id) async {
+  Future<List<TeacherModel>> getTeacherByDepartmentId(
+      String departmentId) async {
     try {
-      Response response = await _apiService
-          .getApi(needTokenAuth: true)
-          .get('/department/$id/teacher');
-      var body = response.data;
+      final DocumentReference<Map<String, dynamic>> departmentRef =
+          _db.doc('departments/$departmentId');
 
-      List<TeacherModel> teachers = body['data']
-          .map<TeacherModel>((teacher) => TeacherModel.fromJson(teacher))
-          .toList();
+      final CollectionReference<Map<String, dynamic>> teachersRef =
+          _db.collection('teachers');
+      final QuerySnapshot teachersSnapshot = await teachersRef
+          .where(
+            'department',
+            isEqualTo: departmentRef,
+          )
+          .orderBy('name')
+          .get();
+
+      final List<TeacherModel> teachers =
+          teachersSnapshot.docs.map<TeacherModel>((snapshot) {
+        final Map<String, dynamic> data =
+            snapshot.data() as Map<String, dynamic>;
+        final Map<String, dynamic> json = <String, dynamic>{
+          'id': snapshot.id,
+          'name': data['name'],
+          'email': data['email'],
+          'imageUrl': data['imageUrl'],
+        };
+
+        return TeacherModel.fromJson(json);
+      }).toList();
 
       return teachers;
-    } on DioError catch (e) {
-      if (e.response != null) {
-        throw e.response!.data['message'];
-      } else {
-        throw e.message;
-      }
+    } catch (e) {
+      rethrow;
     }
   }
 }

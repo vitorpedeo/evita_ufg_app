@@ -1,14 +1,11 @@
 // Package imports:
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
 import 'package:evita_ufg_app/app/data/database/db_firestore.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/data/models/department.dart';
-import 'package:evita_ufg_app/app/data/services/api.dart';
 
 class HomeRepository {
-  final ApiService _apiService = ApiService();
   final FirebaseFirestore _db = DBFirestore.get();
 
   Future<List<DepartmentModel>> getAllDepartments() async {

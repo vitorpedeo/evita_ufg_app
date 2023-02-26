@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:diacritic/diacritic.dart';
 import 'package:get/get.dart';
 
 // Project imports:
@@ -14,14 +15,14 @@ class TeachersController extends GetxController {
   RxList<TeacherModel> allTeachers = <TeacherModel>[].obs;
   RxList<TeacherModel> filteredTeachers = <TeacherModel>[].obs;
 
-  final int departmentId = int.parse(Get.arguments['departmentId']);
+  final String departmentId = Get.arguments['departmentId'];
   final String departmentName = Get.arguments['departmentName'];
 
   Rx<String?> teacherName = Rx<String?>(null);
 
   @override
-  Future<void> onReady() async {
-    super.onReady();
+  Future<void> onInit() async {
+    super.onInit();
 
     await getTeachers();
   }
@@ -57,9 +58,9 @@ class TeachersController extends GetxController {
     } else {
       filteredTeachers.value = allTeachers
           .where(
-            (teacher) => teacher.name!
+            (teacher) => removeDiacritics(teacher.name!)
                 .toLowerCase()
-                .contains(teacherName.value!.toLowerCase()),
+                .contains(removeDiacritics(teacherName.value!).toLowerCase()),
           )
           .toList();
     }
