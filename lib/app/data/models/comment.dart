@@ -2,7 +2,7 @@
 import 'package:evita_ufg_app/app/data/models/user.dart';
 
 class CommentModel {
-  int? id;
+  String? id;
   String? content;
   double? rating;
   int? userId;

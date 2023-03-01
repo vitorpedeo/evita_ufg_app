@@ -272,9 +272,7 @@ class TeacherPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ErrorFeedback(
-          onRetry: () {
-            _controller.getTeacher();
-          },
+          onRetry: () {},
         ),
       ],
     );
@@ -425,7 +423,8 @@ class TeacherPage extends StatelessWidget {
                         },
                         onDelete: () async {
                           await _controller.deleteComment(
-                            _controller.teacher.value!.comments![index].id!,
+                            int.parse(_controller
+                                .teacher.value!.comments![index].id!),
                           );
                         },
                       );

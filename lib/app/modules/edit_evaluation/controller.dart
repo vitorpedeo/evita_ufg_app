@@ -36,7 +36,7 @@ class EditEvaluationController extends GetxController {
       isLoadingEvaluationEdit(true);
 
       await _repository.patchEditEvaluation(
-        comment?.id,
+        int.parse(comment!.id!),
         data,
       );
 
@@ -45,7 +45,6 @@ class EditEvaluationController extends GetxController {
         type: CustomSnackType.success,
       );
 
-      _teacherController.getTeacher();
       _teachersController.getTeachers();
 
       Get.until((route) => Get.currentRoute == '/teacher');

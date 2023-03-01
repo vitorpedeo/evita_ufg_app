@@ -344,10 +344,14 @@ class TeachersPage extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
-                    Get.toNamed('/teacher', arguments: {
-                      'teacherId':
-                          _controller.filteredTeachers[index].id.toString(),
-                    });
+                    Get.toNamed(
+                      '/teacher',
+                      arguments: {
+                        'teacherId':
+                            _controller.filteredTeachers[index].id.toString(),
+                        'teacher': _controller.filteredTeachers[index],
+                      },
+                    );
                   },
                 );
               },

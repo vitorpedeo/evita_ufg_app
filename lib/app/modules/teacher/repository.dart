@@ -1,31 +1,48 @@
 // Package imports:
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
+import 'package:evita_ufg_app/app/data/database/db_firestore.dart';
+import 'package:evita_ufg_app/app/data/models/comment.dart';
 
 // Project imports:
-import 'package:evita_ufg_app/app/data/models/teacher.dart';
 import 'package:evita_ufg_app/app/data/services/api.dart';
 
 class TeacherRepository {
+  final FirebaseFirestore _db = DBFirestore.get();
   final ApiService _apiService = ApiService();
 
-  Future<TeacherModel> getTeacherById(int id) async {
+  Future<List<CommentModel>> getTeacherComments(String teacherId) async {
     try {
-      final response = await _apiService
-          .getApi(
-            needTokenAuth: true,
+      final DocumentReference<Map<String, dynamic>> teacherRef =
+          _db.doc('teachers/$teacherId');
+
+      final CollectionReference<Map<String, dynamic>> commentsRef =
+          _db.collection('comments');
+      final QuerySnapshot commentsSnapshot = await commentsRef
+          .where(
+            'teacher',
+            isEqualTo: teacherRef,
           )
-          .get('/teacher/$id');
-      var body = response.data;
+          .orderBy('updatedAt')
+          .get();
 
-      TeacherModel teacher = TeacherModel.fromJson(body['data']);
+      final List<CommentModel> comments =
+          commentsSnapshot.docs.map<CommentModel>((snapshot) {
+        final Map<String, dynamic> data =
+            snapshot.data() as Map<String, dynamic>;
+        final Map<String, dynamic> json = <String, dynamic>{
+          'id': snapshot.id,
+          'content': data['content'],
+          'rating': data['rating'],
+          'updatedAt': data['updatedAt'],
+        };
 
-      return teacher;
-    } on DioError catch (e) {
-      if (e.response != null) {
-        throw e.response!.data['message'];
-      } else {
-        throw e.message;
-      }
+        return CommentModel.fromJson(json);
+      }).toList();
+
+      return comments;
+    } catch (e) {
+      rethrow;
     }
   }
 

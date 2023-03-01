@@ -11,34 +11,19 @@ class TeacherController extends GetxController {
 
   final int teacherId = int.parse(Get.arguments['teacherId']);
 
-  RxBool isLoadingTeacher = true.obs;
+  RxBool isLoadingTeacher = false.obs;
   RxBool isError = false.obs;
   Rx<TeacherModel?> teacher = Rx<TeacherModel?>(null);
 
   @override
-  Future<void> onReady() async {
-    super.onReady();
+  Future<void> onInit() async {
+    super.onInit();
 
-    await getTeacher();
+    getTeacherFromArgs();
   }
 
-  Future<void> getTeacher() async {
-    try {
-      isLoadingTeacher(true);
-
-      teacher.value = await _teacherRepository.getTeacherById(teacherId);
-
-      isError(false);
-    } catch (e) {
-      CustomSnack.show(
-        message: e.toString(),
-        type: CustomSnackType.error,
-      );
-
-      isError(true);
-    } finally {
-      isLoadingTeacher(false);
-    }
+  void getTeacherFromArgs() {
+    teacher.value = Get.arguments['teacher'] as TeacherModel?;
   }
 
   Future<void> deleteComment(int id) async {
@@ -49,8 +34,6 @@ class TeacherController extends GetxController {
         message: 'Comentário deletado com sucesso!',
         type: CustomSnackType.success,
       );
-
-      getTeacher();
     } catch (e) {
       CustomSnack.show(
         message: e.toString(),
