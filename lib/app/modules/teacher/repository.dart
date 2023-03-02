@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:evita_ufg_app/app/data/database/db_firestore.dart';
 import 'package:evita_ufg_app/app/data/models/comment.dart';
+import 'package:evita_ufg_app/app/data/repositories/auth.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/data/services/api.dart';
@@ -10,6 +11,7 @@ import 'package:evita_ufg_app/app/data/services/api.dart';
 class TeacherRepository {
   final FirebaseFirestore _db = DBFirestore.get();
   final ApiService _apiService = ApiService();
+  final AuthRepository _authRepository = AuthRepository();
 
   Future<List<CommentModel>> getTeacherComments(String teacherId) async {
     try {
@@ -26,19 +28,26 @@ class TeacherRepository {
           .orderBy('updatedAt')
           .get();
 
-      final List<CommentModel> comments =
-          commentsSnapshot.docs.map<CommentModel>((snapshot) {
-        final Map<String, dynamic> data =
-            snapshot.data() as Map<String, dynamic>;
-        final Map<String, dynamic> json = <String, dynamic>{
-          'id': snapshot.id,
-          'content': data['content'],
-          'rating': data['rating'],
-          'updatedAt': data['updatedAt'],
-        };
+      final List<CommentModel> comments = await Future.wait(
+        commentsSnapshot.docs.map<Future<CommentModel>>(
+          (snapshot) async {
+            final Map<String, dynamic> data =
+                snapshot.data() as Map<String, dynamic>;
+            final Map<String, dynamic> json = <String, dynamic>{
+              'id': snapshot.id,
+              'content': data['content'],
+              'rating': data['rating'],
+              'updatedAt': data['updatedAt'],
+            };
 
-        return CommentModel.fromJson(json);
-      }).toList();
+            final CommentModel comment = CommentModel.fromJson(json);
+            comment.user = await _authRepository.getUser(
+                ref: data['user'] as DocumentReference<Map<String, dynamic>>);
+
+            return comment;
+          },
+        ),
+      );
 
       return comments;
     } catch (e) {

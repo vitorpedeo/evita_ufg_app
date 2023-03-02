@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:evita_ufg_app/app/data/models/comment.dart';
 import 'package:get/get.dart';
 
 // Project imports:
@@ -9,8 +10,6 @@ import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 class TeacherController extends GetxController {
   final TeacherRepository _teacherRepository = TeacherRepository();
 
-  final int teacherId = int.parse(Get.arguments['teacherId']);
-
   RxBool isLoadingTeacher = false.obs;
   RxBool isError = false.obs;
   Rx<TeacherModel?> teacher = Rx<TeacherModel?>(null);
@@ -19,11 +18,24 @@ class TeacherController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
 
-    getTeacherFromArgs();
+    teacher.value = Get.arguments['teacher'] as TeacherModel?;
+
+    if (teacher.value != null) {
+      getTeacherComments();
+    }
   }
 
-  void getTeacherFromArgs() {
-    teacher.value = Get.arguments['teacher'] as TeacherModel?;
+  Future<void> getTeacherComments() async {
+    isLoadingTeacher.value = true;
+
+    final List<CommentModel> comments =
+        await _teacherRepository.getTeacherComments(teacher.value!.id!);
+
+    teacher.update((val) {
+      val?.comments = comments;
+    });
+
+    isLoadingTeacher.value = false;
   }
 
   Future<void> deleteComment(int id) async {
