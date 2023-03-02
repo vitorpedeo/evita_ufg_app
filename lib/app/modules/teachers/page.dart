@@ -347,7 +347,7 @@ class TeachersPage extends StatelessWidget {
                     Get.toNamed(
                       '/teacher',
                       arguments: {
-                        'teacher': _controller.filteredTeachers[index],
+                        'teacherId': _controller.filteredTeachers[index].id,
                       },
                     );
                   },

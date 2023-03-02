@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:evita_ufg_app/app/data/services/auth.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -19,8 +18,8 @@ import 'package:evita_ufg_app/core/theme/custom.dart';
 import 'package:evita_ufg_app/core/theme/shimmer_colors.dart';
 
 class TeacherPage extends StatelessWidget {
-  final TeacherController _controller = Get.find<TeacherController>();
-  final AuthService _authService = AuthService.instance;
+  final _controller = Get.find<TeacherController>();
+  final _storageService = Get.find<StorageService>();
 
   TeacherPage({super.key});
 
@@ -36,9 +35,248 @@ class TeacherPage extends StatelessWidget {
             horizontal: 24,
             vertical: 32,
           ),
-          child: _buildPage(context),
+          child: Obx(
+            () {
+              if (_controller.isLoadingTeacher.value) {
+                return _buildShimmer(context);
+              }
+
+              if (_controller.isError.value) {
+                return _buildError();
+              }
+
+              return _buildPage(context);
+            },
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _buildShimmer(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Shimmer.fromColors(
+          baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+          highlightColor:
+              context.theme.extension<ShimmerColors>()!.highlightColor!,
+          child: Container(
+            width: 96,
+            height: 48,
+            decoration: BoxDecoration(
+              color: context.theme.extension<ShimmerColors>()!.baseColor!,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(6),
+              ),
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(
+            top: 32,
+          ),
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Shimmer.fromColors(
+                baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+                highlightColor:
+                    context.theme.extension<ShimmerColors>()!.highlightColor!,
+                child: Container(
+                  width: 56,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    color: context.theme.extension<ShimmerColors>()!.baseColor!,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Shimmer.fromColors(
+                baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+                highlightColor:
+                    context.theme.extension<ShimmerColors>()!.highlightColor!,
+                child: Container(
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: context.theme.extension<ShimmerColors>()!.baseColor!,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(6),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Shimmer.fromColors(
+                    baseColor:
+                        context.theme.extension<ShimmerColors>()!.baseColor!,
+                    highlightColor: context.theme
+                        .extension<ShimmerColors>()!
+                        .highlightColor!,
+                    child: Container(
+                      width: 160,
+                      height: 16,
+                      decoration: BoxDecoration(
+                        color: context.theme
+                            .extension<ShimmerColors>()!
+                            .baseColor!,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(6),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Shimmer.fromColors(
+                    baseColor:
+                        context.theme.extension<ShimmerColors>()!.baseColor!,
+                    highlightColor: context.theme
+                        .extension<ShimmerColors>()!
+                        .highlightColor!,
+                    child: Container(
+                      width: 240,
+                      height: 16,
+                      decoration: BoxDecoration(
+                        color: context.theme
+                            .extension<ShimmerColors>()!
+                            .baseColor!,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(6),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Shimmer.fromColors(
+                    baseColor:
+                        context.theme.extension<ShimmerColors>()!.baseColor!,
+                    highlightColor: context.theme
+                        .extension<ShimmerColors>()!
+                        .highlightColor!,
+                    child: Container(
+                      width: 160,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: context.theme
+                            .extension<ShimmerColors>()!
+                            .baseColor!,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(6),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 32,
+        ),
+        Shimmer.fromColors(
+          baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+          highlightColor:
+              context.theme.extension<ShimmerColors>()!.highlightColor!,
+          child: Container(
+            width: 128,
+            height: 20,
+            decoration: BoxDecoration(
+              color: context.theme.extension<ShimmerColors>()!.baseColor!,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(6),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.symmetric(
+              vertical: 16,
+            ),
+            child: ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 6,
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  height: 16,
+                );
+              },
+              itemBuilder: (context, index) {
+                return Shimmer.fromColors(
+                  baseColor:
+                      context.theme.extension<ShimmerColors>()!.baseColor!,
+                  highlightColor:
+                      context.theme.extension<ShimmerColors>()!.highlightColor!,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                    ),
+                    height: 120,
+                    decoration: BoxDecoration(
+                      color:
+                          context.theme.extension<ShimmerColors>()!.baseColor!,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(6),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+        Shimmer.fromColors(
+          baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
+          highlightColor:
+              context.theme.extension<ShimmerColors>()!.highlightColor!,
+          child: Container(
+            height: 40,
+            decoration: BoxDecoration(
+              color: context.theme.extension<ShimmerColors>()!.baseColor!,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(6),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildError() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ErrorFeedback(
+          onRetry: () {
+            _controller.getTeacher();
+          },
+        ),
+      ],
     );
   }
 
@@ -159,69 +397,58 @@ class TeacherPage extends StatelessWidget {
           fontSize: 14,
         ),
         Expanded(
-          child: Obx(() {
-            if (_controller.isLoadingTeacher.value) {
-              return _buildShimmer(context);
-            }
+          child: Container(
+            margin: const EdgeInsets.symmetric(
+              vertical: 16,
+            ),
+            child: _controller.teacher.value?.comments != null &&
+                    _controller.teacher.value!.comments!.isNotEmpty
+                ? ListView.separated(
+                    itemCount: _controller.teacher.value?.comments?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      bool isFromLoggedUser = _controller
+                              .teacher.value?.comments?[index].user?.id ==
+                          _storageService.user.value?.id;
 
-            if (_controller.isError.value) {
-              return _buildError();
-            }
-
-            return Container(
-              margin: const EdgeInsets.symmetric(
-                vertical: 16,
-              ),
-              child: _controller.teacher.value?.comments != null &&
-                      _controller.teacher.value!.comments!.isNotEmpty
-                  ? ListView.separated(
-                      itemCount:
-                          _controller.teacher.value?.comments?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        bool isFromLoggedUser = _controller
-                                .teacher.value?.comments?[index].user?.id ==
-                            _authService.user.value?.id;
-
-                        return CommentCard(
-                          comment: _controller.teacher.value?.comments?[index],
-                          isFromLoggedUser: isFromLoggedUser,
-                          onEdit: () {
-                            Get.toNamed(
-                              '/edit-evaluation',
-                              arguments: {
-                                'teacher': _controller.teacher.value,
-                                'comment':
-                                    _controller.teacher.value?.comments?[index],
-                              },
-                            );
-                          },
-                          onDelete: () async {
-                            await _controller.deleteComment(
-                              int.parse(_controller
-                                  .teacher.value!.comments![index].id!),
-                            );
-                          },
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 16,
-                        );
-                      },
-                    )
-                  : const BodyText(
-                      'Esse professor ainda não possui avaliações.'),
-            );
-          }),
+                      return CommentCard(
+                        comment: _controller.teacher.value?.comments?[index],
+                        isFromLoggedUser: isFromLoggedUser,
+                        onEdit: () {
+                          Get.toNamed(
+                            '/edit-evaluation',
+                            arguments: {
+                              'teacher': _controller.teacher.value,
+                              'comment':
+                                  _controller.teacher.value?.comments?[index],
+                            },
+                          );
+                        },
+                        onDelete: () async {
+                          await _controller.deleteComment(
+                            int.parse(
+                              _controller.teacher.value!.comments![index].id!,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        height: 16,
+                      );
+                    },
+                  )
+                : const BodyText('Esse professor ainda não possui avaliações.'),
+          ),
         ),
         Obx(() {
           bool userHaveCommented = _controller.teacher.value?.comments?.any(
                   (comment) =>
-                      comment.user?.id == _authService.user.value?.id) ??
+                      comment.user?.id == _storageService.user.value?.id) ??
               false;
 
           if (userHaveCommented) {
-            return const SizedBox.shrink();
+            return Container();
           }
 
           return AppButton(
@@ -236,55 +463,6 @@ class TeacherPage extends StatelessWidget {
             },
           );
         }),
-      ],
-    );
-  }
-
-  Widget _buildShimmer(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        vertical: 16,
-      ),
-      child: ListView.separated(
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: 6,
-        separatorBuilder: (context, index) {
-          return const SizedBox(
-            height: 16,
-          );
-        },
-        itemBuilder: (context, index) {
-          return Shimmer.fromColors(
-            baseColor: context.theme.extension<ShimmerColors>()!.baseColor!,
-            highlightColor:
-                context.theme.extension<ShimmerColors>()!.highlightColor!,
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
-              height: 120,
-              decoration: BoxDecoration(
-                color: context.theme.extension<ShimmerColors>()!.baseColor!,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(6),
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildError() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ErrorFeedback(
-          onRetry: () {
-            _controller.getTeacherComments();
-          },
-        ),
       ],
     );
   }
