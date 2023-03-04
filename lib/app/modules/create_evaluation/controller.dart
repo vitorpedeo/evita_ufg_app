@@ -1,16 +1,16 @@
 // Package imports:
+import 'package:evita_ufg_app/app/data/services/auth.dart';
+import 'package:evita_ufg_app/app/modules/teacher/controller.dart';
 import 'package:get/get.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/data/models/teacher.dart';
 import 'package:evita_ufg_app/app/modules/create_evaluation/repository.dart';
-import 'package:evita_ufg_app/app/modules/teacher/controller.dart';
-import 'package:evita_ufg_app/app/modules/teachers/controller.dart';
 import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 
 class CreateEvaluationController extends GetxController {
+  final AuthService _authService = AuthService.instance;
   final TeacherController _teacherController = Get.find<TeacherController>();
-  final TeachersController _teachersController = Get.find<TeachersController>();
   final CreateEvaluationRepository _repository = CreateEvaluationRepository();
 
   RxBool isLoadingEvaluationCreation = false.obs;
@@ -35,16 +35,17 @@ class CreateEvaluationController extends GetxController {
       await _repository.postNewEvaluation(
         {
           ...data,
-          'teacher_id': teacher?.id,
+          'teacher': teacher?.id,
+          'user': _authService.user.value?.id,
         },
       );
+
+      await _teacherController.getTeacher();
 
       CustomSnack.show(
         message: 'Avaliação salva com sucesso!',
         type: CustomSnackType.success,
       );
-
-      _teachersController.getTeachers();
 
       Get.until((route) => Get.currentRoute == '/teacher');
     } catch (e) {
