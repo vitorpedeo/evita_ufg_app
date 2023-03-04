@@ -33,6 +33,8 @@ class TeachersRepository {
           'name': data['name'],
           'email': data['email'],
           'imageUrl': data['imageUrl'],
+          'rating': data['rating'],
+          'evaluations': data['evaluations'],
         };
 
         return TeacherModel.fromJson(json);

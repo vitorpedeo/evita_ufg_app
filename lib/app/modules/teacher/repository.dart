@@ -30,13 +30,15 @@ class TeacherRepository {
         'name': data['name'],
         'email': data['email'],
         'imageUrl': data['imageUrl'],
+        'rating': data['rating'],
+        'evaluations': data['evaluations'],
       };
+
+      final TeacherModel teacher = TeacherModel.fromJson(json);
 
       final DepartmentModel department = await getTeacherDepartment(
           data['department'] as DocumentReference<Map<String, dynamic>>);
       final List<CommentModel> comments = await getTeacherComments(teacherRef);
-
-      final TeacherModel teacher = TeacherModel.fromJson(json);
 
       teacher.department = department;
       teacher.comments = comments;
