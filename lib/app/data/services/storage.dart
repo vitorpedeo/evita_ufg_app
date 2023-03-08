@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 // Project imports:
 import 'package:evita_ufg_app/app/data/models/user.dart';
 
-class StorageService extends GetxService {
+class StorageService extends GetxController {
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
   static const String _tokenKey = '@evita_ufg:token';
@@ -19,12 +19,12 @@ class StorageService extends GetxService {
   Rx<UserModel?> user = Rx<UserModel?>(null);
   RxBool authenticated = false.obs;
 
-  Future<StorageService> init() async {
+  static StorageService get instance => Get.find<StorageService>();
+
+  Future<void> initStorage() async {
     token.value = await getToken();
     user.value = await getUser();
     authenticated.value = await getAuthenticated();
-
-    return this;
   }
 
   Future<void> clear() async {

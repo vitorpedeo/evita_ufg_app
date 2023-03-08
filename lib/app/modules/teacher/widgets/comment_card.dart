@@ -91,11 +91,7 @@ class CommentCard extends StatelessWidget {
                     height: 4,
                   ),
                   BodyText(
-                    comment?.updatedAt != null
-                        ? DateFormat(
-                                "dd 'de' MMMM 'de' yyyy, 'às' HH:mm", 'pt_BR')
-                            .format(comment!.updatedAt!)
-                        : '---',
+                    comment?.updatedAt != null ? comment!.updatedAt! : '---',
                     fontSize: 10,
                   ),
                 ],
@@ -150,6 +146,7 @@ class CommentCard extends StatelessWidget {
                       content: const BodyText(
                           'Tem certeza que deseja excluir sua avaliação?',
                           fontSize: 14),
+                      backgroundColor: context.theme.backgroundColor,
                       actions: [
                         AppButton(
                           'Não',

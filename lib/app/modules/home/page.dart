@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:evita_ufg_app/app/modules/home/widgets/home_drawer.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,6 +7,7 @@ import 'package:shimmer/shimmer.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/modules/home/controller.dart';
+import 'package:evita_ufg_app/app/modules/home/widgets/home_drawer.dart';
 import 'package:evita_ufg_app/app/widgets/app_card.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/app/widgets/error_feedback.dart';

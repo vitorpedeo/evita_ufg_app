@@ -1,18 +1,18 @@
 // Package imports:
+import 'package:diacritic/diacritic.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/data/models/department.dart';
-import 'package:evita_ufg_app/app/data/services/storage.dart';
+import 'package:evita_ufg_app/app/data/services/auth.dart';
 import 'package:evita_ufg_app/app/modules/home/repository.dart';
 import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 
 class HomeController extends GetxController {
-  final StorageService _storageService = Get.find<StorageService>();
   final HomeRepository _homeRepository = HomeRepository();
 
-  RxBool isLoadingDepartments = true.obs;
+  RxBool isLoadingDepartments = false.obs;
   RxBool isError = false.obs;
   List<DepartmentModel> allDepartments = <DepartmentModel>[];
   RxList<DepartmentModel> filteredDepartments = <DepartmentModel>[].obs;
@@ -22,8 +22,8 @@ class HomeController extends GetxController {
   RxString selectedRegional = 'Todas'.obs;
 
   @override
-  void onReady() async {
-    super.onReady();
+  void onInit() async {
+    super.onInit();
 
     await getAllDepartments();
   }
@@ -82,8 +82,8 @@ class HomeController extends GetxController {
         filteredDepartments.value = allDepartments
             .where(
               (department) =>
-                  department.name!.toLowerCase().contains(
-                        departmentName.value!.toLowerCase(),
+                  removeDiacritics(department.name!).toLowerCase().contains(
+                        removeDiacritics(departmentName.value!).toLowerCase(),
                       ) &&
                   department.regional!.toLowerCase() ==
                       selectedRegional.value.toLowerCase(),
@@ -96,9 +96,10 @@ class HomeController extends GetxController {
       } else {
         filteredDepartments.value = allDepartments
             .where(
-              (department) => department.name!.toLowerCase().contains(
-                    departmentName.value!.toLowerCase(),
-                  ),
+              (department) =>
+                  removeDiacritics(department.name!).toLowerCase().contains(
+                        removeDiacritics(departmentName.value!).toLowerCase(),
+                      ),
             )
             .toList();
       }
@@ -107,16 +108,14 @@ class HomeController extends GetxController {
 
   Future<void> logout() async {
     try {
-      await _homeRepository.getInvalidateToken();
+      if (await AuthService.instance.logout()) {
+        CustomSnack.show(
+          message: 'Até mais!',
+          type: CustomSnackType.success,
+        );
 
-      await _storageService.clear();
-
-      CustomSnack.show(
-        message: 'Até mais!',
-        type: CustomSnackType.success,
-      );
-
-      Get.offAllNamed('/login');
+        Get.offAllNamed('/login');
+      }
     } catch (e) {
       CustomSnack.show(
         message: e.toString(),

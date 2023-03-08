@@ -1,9 +1,8 @@
 class UserModel {
-  int? id;
+  String? id;
   String? name;
   String? avatarUrl;
   String? email;
-  String? password;
   String? createdAt;
 
   UserModel({
@@ -11,17 +10,15 @@ class UserModel {
     this.name,
     this.avatarUrl,
     this.email,
-    this.password,
     this.createdAt,
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    avatarUrl = json['avatar_url'];
+    avatarUrl = json['avatarUrl'];
     email = json['email'];
-    password = json['password'];
-    createdAt = json['created_at'];
+    createdAt = json['createdAt'];
   }
 
   Map<String, dynamic> toJson() {
@@ -29,10 +26,20 @@ class UserModel {
 
     data['id'] = id;
     data['name'] = name;
-    data['avatar_url'] = avatarUrl;
+    data['avatarUrl'] = avatarUrl;
     data['email'] = email;
-    data['password'] = password;
-    data['created_at'] = createdAt;
+    data['createdAt'] = createdAt;
+
+    return data;
+  }
+
+  Map<String, dynamic> toFirebaseJson() {
+    final data = <String, dynamic>{};
+
+    data['name'] = name;
+    data['avatarUrl'] = avatarUrl;
+    data['email'] = email;
+    data['createdAt'] = createdAt;
 
     return data;
   }

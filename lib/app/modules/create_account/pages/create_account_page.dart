@@ -1,6 +1,4 @@
 // Flutter imports:
-import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
-import 'package:evita_ufg_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -12,9 +10,11 @@ import 'package:get/get.dart';
 import 'package:evita_ufg_app/app/modules/create_account/controller.dart';
 import 'package:evita_ufg_app/app/widgets/app_button.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
+import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
+import 'package:evita_ufg_app/routes/routes.dart';
 
 class CreateAccountPage extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
