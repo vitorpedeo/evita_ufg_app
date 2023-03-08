@@ -1,13 +1,18 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:get/get.dart';
+
+// Project imports:
 import 'package:evita_ufg_app/app/data/services/auth.dart';
 import 'package:evita_ufg_app/app/data/services/theme.dart';
 import 'package:evita_ufg_app/app/modules/home/controller.dart';
+import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
 import 'package:evita_ufg_app/core/utils/string_utils.dart';
-import 'package:get/get.dart';
-import 'package:evita_ufg_app/app/widgets/body_text.dart';
-import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatelessWidget {
   final _controller = Get.find<HomeController>();

@@ -146,6 +146,7 @@ class CommentCard extends StatelessWidget {
                       content: const BodyText(
                           'Tem certeza que deseja excluir sua avaliação?',
                           fontSize: 14),
+                      backgroundColor: context.theme.backgroundColor,
                       actions: [
                         AppButton(
                           'Não',

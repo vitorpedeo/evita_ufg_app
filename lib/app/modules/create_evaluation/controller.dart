@@ -1,14 +1,14 @@
 // Package imports:
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:evita_ufg_app/app/data/models/comment.dart';
-import 'package:evita_ufg_app/app/data/services/auth.dart';
-import 'package:evita_ufg_app/app/modules/teacher/controller.dart';
-import 'package:evita_ufg_app/app/modules/teachers/controller.dart';
 import 'package:get/get.dart';
 
 // Project imports:
+import 'package:evita_ufg_app/app/data/models/comment.dart';
 import 'package:evita_ufg_app/app/data/models/teacher.dart';
+import 'package:evita_ufg_app/app/data/services/auth.dart';
 import 'package:evita_ufg_app/app/modules/create_evaluation/repository.dart';
+import 'package:evita_ufg_app/app/modules/teacher/controller.dart';
+import 'package:evita_ufg_app/app/modules/teachers/controller.dart';
 import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 
 class CreateEvaluationController extends GetxController {

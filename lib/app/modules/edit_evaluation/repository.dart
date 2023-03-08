@@ -1,6 +1,7 @@
 // Package imports:
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
+
+// Project imports:
 import 'package:evita_ufg_app/app/data/database/db_firestore.dart';
 
 class EditEvaluationRepository {

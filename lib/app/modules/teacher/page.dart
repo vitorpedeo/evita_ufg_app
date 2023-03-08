@@ -425,9 +425,7 @@ class TeacherPage extends StatelessWidget {
                         },
                         onDelete: () async {
                           await _controller.deleteComment(
-                            int.parse(
-                              _controller.teacher.value!.comments![index].id!,
-                            ),
+                            _controller.teacher.value!.comments![index],
                           );
                         },
                       );

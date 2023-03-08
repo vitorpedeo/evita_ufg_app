@@ -1,7 +1,10 @@
+// Package imports:
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+// Project imports:
 import 'package:evita_ufg_app/app/data/database/db_firestore.dart';
 import 'package:evita_ufg_app/app/data/models/user.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepository {
   late final FirebaseFirestore _dbFirestore;

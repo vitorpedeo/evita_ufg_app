@@ -1,11 +1,14 @@
+// Package imports:
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+// Project imports:
 import 'package:evita_ufg_app/app/data/models/user.dart';
 import 'package:evita_ufg_app/app/data/repositories/auth.dart';
 import 'package:evita_ufg_app/app/data/services/storage.dart';
 import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 import 'package:evita_ufg_app/routes/routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService extends GetxController {
   final AuthRepository _authRepository = AuthRepository();

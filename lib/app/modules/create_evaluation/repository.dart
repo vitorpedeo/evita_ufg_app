@@ -1,8 +1,10 @@
 // Package imports:
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:evita_ufg_app/app/data/database/db_firestore.dart';
 import 'package:evita_ufg_app/app/data/models/comment.dart';
-import 'package:intl/intl.dart';
 
 class CreateEvaluationRepository {
   final FirebaseFirestore _db = DBFirestore.get();

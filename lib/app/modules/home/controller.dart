@@ -1,11 +1,11 @@
 // Package imports:
 import 'package:diacritic/diacritic.dart';
-import 'package:evita_ufg_app/app/data/services/auth.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/data/models/department.dart';
+import 'package:evita_ufg_app/app/data/services/auth.dart';
 import 'package:evita_ufg_app/app/modules/home/repository.dart';
 import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 
