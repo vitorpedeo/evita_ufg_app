@@ -38,7 +38,7 @@ class EditEvaluationPage extends StatelessWidget {
     bool isKeyboardOpen = Get.mediaQuery.viewInsets.bottom > 0;
 
     return Scaffold(
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: context.theme.colorScheme.background,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -100,8 +100,8 @@ class EditEvaluationPage extends StatelessWidget {
                                 ),
                                 BodyText(
                                   _controller.teacher?.email ?? '---',
-                                  color:
-                                      context.theme.textTheme.headline1?.color,
+                                  color: context
+                                      .theme.textTheme.displayLarge?.color,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
                                 ),

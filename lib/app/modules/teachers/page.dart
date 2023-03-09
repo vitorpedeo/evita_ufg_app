@@ -24,7 +24,7 @@ class TeachersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: context.theme.colorScheme.background,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -285,7 +285,7 @@ class TeachersPage extends StatelessWidget {
                       prefixIcon: Icon(
                         Icons.search,
                         size: 20,
-                        color: context.theme.textTheme.bodyText1?.color,
+                        color: context.theme.textTheme.bodyLarge?.color,
                       ),
                     ),
                   ),
@@ -327,7 +327,8 @@ class TeachersPage extends StatelessWidget {
                               text:
                                   '${_controller.filteredTeachers[index].rating.toString()} ',
                               style: TextStyle(
-                                color: context.theme.textTheme.headline1?.color,
+                                color:
+                                    context.theme.textTheme.displayLarge?.color,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -335,7 +336,7 @@ class TeachersPage extends StatelessWidget {
                               text:
                                   '(${_controller.filteredTeachers[index].evaluations.toString()})',
                               style: TextStyle(
-                                color: context.theme.textTheme.bodyText1?.color,
+                                color: context.theme.textTheme.bodyLarge?.color,
                               ),
                             ),
                           ],

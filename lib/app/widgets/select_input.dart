@@ -46,14 +46,14 @@ class SelectInput<T> extends StatelessWidget {
           isDense: true,
           isExpanded: true,
           hint: Text(hint ?? ''),
-          dropdownColor: context.theme.backgroundColor,
+          dropdownColor: context.theme.colorScheme.background,
           style: TextStyle(
-            color: context.theme.textTheme.headline1?.color,
+            color: context.theme.textTheme.displayLarge?.color,
             fontSize: 14,
           ),
           icon: Icon(
             Icons.keyboard_arrow_down_outlined,
-            color: context.theme.textTheme.bodyText1?.color,
+            color: context.theme.textTheme.bodyLarge?.color,
           ),
         ),
       ),

@@ -15,7 +15,7 @@ class TermsOfUsePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: context.theme.colorScheme.background,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,

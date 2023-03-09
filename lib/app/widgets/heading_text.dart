@@ -77,9 +77,10 @@ class HeadingText extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.inter(
-        color: color ?? context.theme.textTheme.headline1?.color,
-        fontSize: fontSize ?? context.theme.textTheme.headline1?.fontSize,
-        fontWeight: fontWeight ?? context.theme.textTheme.headline1?.fontWeight,
+        color: color ?? context.theme.textTheme.displayLarge?.color,
+        fontSize: fontSize ?? context.theme.textTheme.displayLarge?.fontSize,
+        fontWeight:
+            fontWeight ?? context.theme.textTheme.displayLarge?.fontWeight,
         backgroundColor: backgroundColor,
         fontStyle: fontStyle,
         letterSpacing: letterSpacing,

@@ -25,7 +25,7 @@ class HomeDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       width: Get.width * 0.8,
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: context.theme.colorScheme.background,
       child: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(0),
@@ -35,7 +35,7 @@ class HomeDrawer extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
-                    color: context.theme.textTheme.bodyText1!.color!,
+                    color: context.theme.textTheme.bodyLarge!.color!,
                   ),
                 ),
               ),
@@ -131,7 +131,7 @@ class HomeDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(
                 Icons.account_circle,
-                color: context.theme.textTheme.headline1?.color,
+                color: context.theme.textTheme.displayLarge?.color,
                 size: 28,
               ),
               title: const BodyText(
@@ -150,12 +150,12 @@ class HomeDrawer extends StatelessWidget {
               leading: _themeService.isDarkMode.value
                   ? Icon(
                       Icons.nightlight_round,
-                      color: context.theme.textTheme.headline1?.color,
+                      color: context.theme.textTheme.displayLarge?.color,
                       size: 28,
                     )
                   : Icon(
                       Icons.wb_sunny_rounded,
-                      color: context.theme.textTheme.headline1?.color,
+                      color: context.theme.textTheme.displayLarge?.color,
                       size: 28,
                     ),
               title: const BodyText(
@@ -173,7 +173,7 @@ class HomeDrawer extends StatelessWidget {
               },
               leading: Icon(
                 Icons.logout_rounded,
-                color: context.theme.textTheme.headline1?.color,
+                color: context.theme.textTheme.displayLarge?.color,
                 size: 28,
               ),
               title: const BodyText(

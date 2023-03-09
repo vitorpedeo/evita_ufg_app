@@ -86,7 +86,7 @@ class TextInput extends StatelessWidget {
             children: [
               BodyText(
                 label!,
-                color: context.theme.textTheme.bodyText2?.color,
+                color: context.theme.textTheme.bodyMedium?.color,
               ),
               const SizedBox(
                 height: 8,
@@ -138,7 +138,7 @@ class TextInput extends StatelessWidget {
                     textCapitalization ?? TextCapitalization.none,
                 style: style ??
                     TextStyle(
-                      color: context.theme.textTheme.headline1?.color,
+                      color: context.theme.textTheme.displayLarge?.color,
                       fontFamily: CustomTheme.fontFamily,
                       fontSize: 14,
                     ),
@@ -209,7 +209,7 @@ class TextInput extends StatelessWidget {
             textCapitalization: textCapitalization ?? TextCapitalization.none,
             style: style ??
                 TextStyle(
-                  color: context.theme.textTheme.headline1?.color,
+                  color: context.theme.textTheme.displayLarge?.color,
                   fontFamily: CustomTheme.fontFamily,
                   fontSize: 14,
                 ),

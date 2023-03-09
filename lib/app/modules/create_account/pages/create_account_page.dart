@@ -47,7 +47,7 @@ class CreateAccountPage extends StatelessWidget {
     bool isKeyboardOpen = Get.mediaQuery.viewInsets.bottom > 0;
 
     return Scaffold(
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: context.theme.colorScheme.background,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -242,7 +242,7 @@ class CreateAccountPage extends StatelessWidget {
                                     BodyText(
                                       'Declaro que aceito os',
                                       color: context
-                                          .theme.textTheme.bodyText2?.color,
+                                          .theme.textTheme.bodyMedium?.color,
                                     ),
                                     const SizedBox(
                                       width: 4,
@@ -285,7 +285,7 @@ class CreateAccountPage extends StatelessWidget {
                         children: [
                           BodyText(
                             'Já tem uma conta?',
-                            color: context.theme.textTheme.bodyText2?.color,
+                            color: context.theme.textTheme.bodyMedium?.color,
                           ),
                           TextButton(
                             onPressed: () {
