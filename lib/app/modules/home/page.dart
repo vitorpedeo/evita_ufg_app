@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:evita_ufg_app/app/modules/home/widgets/home_drawer.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,6 +7,7 @@ import 'package:shimmer/shimmer.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/modules/home/controller.dart';
+import 'package:evita_ufg_app/app/modules/home/widgets/home_drawer.dart';
 import 'package:evita_ufg_app/app/widgets/app_card.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/app/widgets/error_feedback.dart';
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       drawer: HomeDrawer(),
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: context.theme.colorScheme.background,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -271,7 +271,7 @@ class HomePage extends StatelessWidget {
                     child: Icon(
                       Icons.menu_rounded,
                       size: 32,
-                      color: context.theme.textTheme.headline1?.color,
+                      color: context.theme.textTheme.displayLarge?.color,
                     ),
                   ),
                 ],
@@ -304,7 +304,7 @@ class HomePage extends StatelessWidget {
                   prefixIcon: Icon(
                     Icons.search,
                     size: 20,
-                    color: context.theme.textTheme.bodyText1?.color,
+                    color: context.theme.textTheme.bodyLarge?.color,
                   ),
                   onChanged: (value) {
                     _controller.departmentName.value = value;

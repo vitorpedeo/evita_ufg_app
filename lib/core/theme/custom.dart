@@ -24,11 +24,11 @@ class CustomTheme {
   static final String fontFamily = GoogleFonts.inter().fontFamily!;
 
   static final ThemeData lightTheme = ThemeData(
-    backgroundColor: Colors.white,
     fontFamily: fontFamily,
     colorScheme: ColorScheme.fromSeed(
       seedColor: primaryColor,
       secondary: accentColor,
+      background: Colors.white,
     ),
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(
@@ -37,17 +37,17 @@ class CustomTheme {
       fillColor: Color.fromRGBO(237, 242, 247, 1),
     ),
     textTheme: const TextTheme(
-      headline1: TextStyle(
+      displayLarge: TextStyle(
         color: primaryTextColor,
         fontSize: 24,
         fontWeight: FontWeight.w700,
       ),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
         color: secondaryTextColor,
         fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         color: tertiaryTextColor,
         fontSize: 14,
         fontWeight: FontWeight.w400,
@@ -62,11 +62,11 @@ class CustomTheme {
   );
 
   static final ThemeData darkTheme = ThemeData(
-    backgroundColor: const Color.fromRGBO(26, 32, 44, 1),
     fontFamily: fontFamily,
     colorScheme: ColorScheme.fromSeed(
       seedColor: primaryColor,
       secondary: accentColor,
+      background: const Color.fromRGBO(26, 32, 44, 1),
     ),
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(
@@ -75,17 +75,17 @@ class CustomTheme {
       fillColor: Color.fromRGBO(255, 255, 255, 0.05),
     ),
     textTheme: const TextTheme(
-      headline1: TextStyle(
+      displayLarge: TextStyle(
         color: primaryDarkTextColor,
         fontSize: 24,
         fontWeight: FontWeight.w700,
       ),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
         color: secondaryDarkTextColor,
         fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         color: tertiaryDarkTextColor,
         fontSize: 14,
         fontWeight: FontWeight.w400,

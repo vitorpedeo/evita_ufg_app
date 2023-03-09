@@ -1,15 +1,22 @@
-import 'package:evita_ufg_app/app/data/services/storage.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:get/get.dart';
+
+// Project imports:
+import 'package:evita_ufg_app/app/data/services/auth.dart';
 import 'package:evita_ufg_app/app/data/services/theme.dart';
 import 'package:evita_ufg_app/app/modules/home/controller.dart';
+import 'package:evita_ufg_app/app/widgets/body_text.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
-import 'package:get/get.dart';
-import 'package:evita_ufg_app/app/widgets/body_text.dart';
-import 'package:flutter/material.dart';
+import 'package:evita_ufg_app/core/utils/string_utils.dart';
 
 class HomeDrawer extends StatelessWidget {
   final _controller = Get.find<HomeController>();
-  final _storageService = Get.find<StorageService>();
+  final _authService = AuthService.instance;
   final _themeService = Get.find<ThemeService>();
 
   HomeDrawer({super.key});
@@ -17,7 +24,8 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: context.theme.backgroundColor,
+      width: Get.width * 0.8,
+      backgroundColor: context.theme.colorScheme.background,
       child: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(0),
@@ -27,25 +35,75 @@ class HomeDrawer extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
-                    color: context.theme.textTheme.bodyText1!.color!,
+                    color: context.theme.textTheme.bodyLarge!.color!,
                   ),
                 ),
               ),
               child: Row(
                 children: [
-                  _storageService.user.value?.avatarUrl != null
-                      ? CircleAvatar(
-                          backgroundImage: NetworkImage(
-                            _storageService.user.value!.avatarUrl!,
-                          ),
-                          minRadius: 28,
+                  _authService.user.value?.avatarUrl != null
+                      ? CachedNetworkImage(
+                          imageUrl: _authService.user.value!.avatarUrl!,
+                          imageBuilder: (context, imageProvider) {
+                            return CircleAvatar(
+                              radius: 28,
+                              backgroundImage: imageProvider,
+                            );
+                          },
+                          placeholder: (context, url) {
+                            return Container(
+                              width: 28,
+                              height: 28,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: CustomTheme.accentColor,
+                              ),
+                              child: Center(
+                                child: HeadingText(
+                                  StringUtils.getFirstLetter(
+                                    _authService.user.value!.name,
+                                  ),
+                                  color: CustomTheme.primaryColor,
+                                  fontSize: 24,
+                                ),
+                              ),
+                            );
+                          },
+                          errorWidget: (context, url, error) {
+                            return Container(
+                              width: 28,
+                              height: 28,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: CustomTheme.accentColor,
+                              ),
+                              child: Center(
+                                child: HeadingText(
+                                  StringUtils.getFirstLetter(
+                                    _authService.user.value!.name,
+                                  ),
+                                  color: CustomTheme.primaryColor,
+                                  fontSize: 24,
+                                ),
+                              ),
+                            );
+                          },
                         )
-                      : const CircleAvatar(
-                          backgroundColor: CustomTheme.accentColor,
-                          minRadius: 28,
-                          child: Icon(
-                            Icons.person,
-                            color: CustomTheme.primaryColor,
+                      : Container(
+                          width: 48,
+                          height: 48,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: CustomTheme.accentColor,
+                          ),
+                          child: Center(
+                            child: HeadingText(
+                              StringUtils.getFirstLetter(
+                                _authService.user.value!.name,
+                              ),
+                              color: CustomTheme.primaryColor,
+                              fontSize: 24,
+                            ),
                           ),
                         ),
                   const SizedBox(
@@ -55,14 +113,14 @@ class HomeDrawer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       HeadingText(
-                        _storageService.user.value?.name ?? '---',
+                        _authService.user.value?.name ?? '---',
                         fontSize: 16,
                       ),
                       const SizedBox(
                         height: 4,
                       ),
                       BodyText(
-                        'Conta criada em ${_controller.formatAccountCreationDate(_storageService.user.value?.createdAt)}',
+                        'Conta criada em ${_controller.formatAccountCreationDate(_authService.user.value?.createdAt)}',
                         fontSize: 12,
                       ),
                     ],
@@ -73,7 +131,7 @@ class HomeDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(
                 Icons.account_circle,
-                color: context.theme.textTheme.headline1?.color,
+                color: context.theme.textTheme.displayLarge?.color,
                 size: 28,
               ),
               title: const BodyText(
@@ -92,12 +150,12 @@ class HomeDrawer extends StatelessWidget {
               leading: _themeService.isDarkMode.value
                   ? Icon(
                       Icons.nightlight_round,
-                      color: context.theme.textTheme.headline1?.color,
+                      color: context.theme.textTheme.displayLarge?.color,
                       size: 28,
                     )
                   : Icon(
                       Icons.wb_sunny_rounded,
-                      color: context.theme.textTheme.headline1?.color,
+                      color: context.theme.textTheme.displayLarge?.color,
                       size: 28,
                     ),
               title: const BodyText(
@@ -115,7 +173,7 @@ class HomeDrawer extends StatelessWidget {
               },
               leading: Icon(
                 Icons.logout_rounded,
-                color: context.theme.textTheme.headline1?.color,
+                color: context.theme.textTheme.displayLarge?.color,
                 size: 28,
               ),
               title: const BodyText(

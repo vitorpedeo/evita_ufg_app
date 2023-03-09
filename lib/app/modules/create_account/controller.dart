@@ -2,12 +2,11 @@
 import 'package:get/get.dart';
 
 // Project imports:
-import 'package:evita_ufg_app/app/modules/create_account/repository.dart';
+import 'package:evita_ufg_app/app/data/services/auth.dart';
 import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
+import 'package:evita_ufg_app/routes/routes.dart';
 
 class CreateAccountController extends GetxController {
-  final CreateAccountRepository _repository = CreateAccountRepository();
-
   RxBool isLoading = false.obs;
   bool hasAcceptedTerms = false;
 
@@ -15,14 +14,14 @@ class CreateAccountController extends GetxController {
     try {
       isLoading(true);
 
-      await _repository.postNewAccount(data);
+      if (await AuthService.instance.register(data)) {
+        CustomSnack.show(
+          message: 'Conta criada com sucesso!',
+          type: CustomSnackType.success,
+        );
 
-      CustomSnack.show(
-        message: 'Conta criada com sucesso!',
-        type: CustomSnackType.success,
-      );
-
-      Get.offAllNamed('/login');
+        Get.offAllNamed(Routes.home);
+      }
     } catch (e) {
       CustomSnack.show(
         message: e.toString(),

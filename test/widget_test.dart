@@ -17,7 +17,7 @@ import 'package:evita_ufg_app/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(EvitaUFGApp());
+    await tester.pumpWidget(const EvitaUFGApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

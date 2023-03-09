@@ -26,7 +26,7 @@ class TeacherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: context.theme.colorScheme.background,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -334,7 +334,7 @@ class TeacherPage extends StatelessWidget {
               ),
               BodyText(
                 _controller.teacher.value?.email ?? '---',
-                color: context.theme.textTheme.headline1?.color,
+                color: context.theme.textTheme.displayLarge?.color,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
                 textAlign: TextAlign.center,
@@ -370,7 +370,7 @@ class TeacherPage extends StatelessWidget {
                         TextSpan(
                           text: '${_controller.teacher.value?.rating} ',
                           style: TextStyle(
-                            color: context.theme.textTheme.headline1?.color,
+                            color: context.theme.textTheme.displayLarge?.color,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -378,7 +378,7 @@ class TeacherPage extends StatelessWidget {
                           text:
                               '(${_controller.teacher.value?.evaluations} $evaluationsString)',
                           style: TextStyle(
-                            color: context.theme.textTheme.bodyText1?.color,
+                            color: context.theme.textTheme.bodyLarge?.color,
                           ),
                         ),
                       ],
@@ -425,7 +425,7 @@ class TeacherPage extends StatelessWidget {
                         },
                         onDelete: () async {
                           await _controller.deleteComment(
-                            _controller.teacher.value!.comments![index].id!,
+                            _controller.teacher.value!.comments![index],
                           );
                         },
                       );

@@ -1,6 +1,4 @@
 // Flutter imports:
-import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
-import 'package:evita_ufg_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -12,9 +10,11 @@ import 'package:get/get.dart';
 import 'package:evita_ufg_app/app/modules/create_account/controller.dart';
 import 'package:evita_ufg_app/app/widgets/app_button.dart';
 import 'package:evita_ufg_app/app/widgets/body_text.dart';
+import 'package:evita_ufg_app/app/widgets/custom_snack.dart';
 import 'package:evita_ufg_app/app/widgets/heading_text.dart';
 import 'package:evita_ufg_app/app/widgets/text_input.dart';
 import 'package:evita_ufg_app/core/theme/custom.dart';
+import 'package:evita_ufg_app/routes/routes.dart';
 
 class CreateAccountPage extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
@@ -47,7 +47,7 @@ class CreateAccountPage extends StatelessWidget {
     bool isKeyboardOpen = Get.mediaQuery.viewInsets.bottom > 0;
 
     return Scaffold(
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: context.theme.colorScheme.background,
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -66,7 +66,30 @@ class CreateAccountPage extends StatelessWidget {
                 !isKeyboardOpen
                     ? Column(
                         children: [
-                          SizedBox(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              TextButton.icon(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                icon: const Icon(
+                                  Icons.keyboard_backspace_outlined,
+                                  size: 24,
+                                ),
+                                label: const BodyText(
+                                  'Voltar',
+                                  color: CustomTheme.primaryColor,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                              top: 32,
+                            ),
                             width: 80,
                             height: 80,
                             child: FittedBox(
@@ -219,7 +242,7 @@ class CreateAccountPage extends StatelessWidget {
                                     BodyText(
                                       'Declaro que aceito os',
                                       color: context
-                                          .theme.textTheme.bodyText2?.color,
+                                          .theme.textTheme.bodyMedium?.color,
                                     ),
                                     const SizedBox(
                                       width: 4,
@@ -262,7 +285,7 @@ class CreateAccountPage extends StatelessWidget {
                         children: [
                           BodyText(
                             'Já tem uma conta?',
-                            color: context.theme.textTheme.bodyText2?.color,
+                            color: context.theme.textTheme.bodyMedium?.color,
                           ),
                           TextButton(
                             onPressed: () {

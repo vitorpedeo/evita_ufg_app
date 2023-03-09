@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 // Project imports:
 import 'package:evita_ufg_app/app/data/models/comment.dart';
@@ -64,7 +63,7 @@ class CommentCard extends StatelessWidget {
                     children: [
                       BodyText(
                         comment?.user?.name ?? '---',
-                        color: context.theme.textTheme.headline1?.color,
+                        color: context.theme.textTheme.displayLarge?.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
                       ),
@@ -81,7 +80,7 @@ class CommentCard extends StatelessWidget {
                       ),
                       BodyText(
                         comment?.rating.toString() ?? '---',
-                        color: context.theme.textTheme.headline1?.color,
+                        color: context.theme.textTheme.displayLarge?.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
                       ),
@@ -91,11 +90,7 @@ class CommentCard extends StatelessWidget {
                     height: 4,
                   ),
                   BodyText(
-                    comment?.updatedAt != null
-                        ? DateFormat(
-                                "dd 'de' MMMM 'de' yyyy, 'às' HH:mm", 'pt_BR')
-                            .format(comment!.updatedAt!)
-                        : '---',
+                    comment?.updatedAt != null ? comment!.updatedAt! : '---',
                     fontSize: 10,
                   ),
                 ],
@@ -150,6 +145,7 @@ class CommentCard extends StatelessWidget {
                       content: const BodyText(
                           'Tem certeza que deseja excluir sua avaliação?',
                           fontSize: 14),
+                      backgroundColor: context.theme.colorScheme.background,
                       actions: [
                         AppButton(
                           'Não',

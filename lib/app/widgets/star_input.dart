@@ -26,7 +26,7 @@ class StarInput extends StatelessWidget {
           children: [
             BodyText(
               'Nota',
-              color: context.theme.textTheme.bodyText2?.color,
+              color: context.theme.textTheme.bodyMedium?.color,
             ),
             const SizedBox(
               height: 8,
